@@ -1,0 +1,26 @@
+#title{
+    max-width: 2000px;
+    height: 100px;
+    border-bottom: 2px solid black;
+
+}
+h1{
+    position: relative;
+    left: 150px;
+}
+.container{
+    display: flex;
+    max-width: 2000px;
+}
+.sideBar{
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    height: 750px;
+    border: 2px solid black;
+}
+.main{
+    border: 2px solid black;
+    width: 1650px;
+    height: 750px;
+}
