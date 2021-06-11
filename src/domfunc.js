@@ -7,9 +7,8 @@ const domFun = (() => {
     };
     const divMaker = (text = '', style) => {
         let div = document.createElement('div');
-        div.textContent = text;
         div.classList.add(style);
-        return button
+        return div
     };
     const h2Maker = (text = '', style) => {
         let h2 = document.createElement('h2');

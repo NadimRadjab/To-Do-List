@@ -1,6 +1,6 @@
-class Project {
-    constructor(name) {
-        this.name = name
+export class Project {
+    constructor(title) {
+        this.title = title
         this.todo = [];
 
     }
@@ -10,7 +10,7 @@ class Project {
 }
 
 
-class Todo {
+export class Todo {
     constructor(title, description, dueDate, prioriy) {
         this.title = title
         this.description = description
@@ -22,5 +22,3 @@ class Todo {
     }
 }
 
-export class Project { }
-export class Todo { }
