@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TodoApp</title>
-<script defer src="runtime.efeb25092b554dacd53e.js"></script><script defer src="index.92df4634262aa37e87aa.js"></script><script defer src="vendor.85b90a4ba47d4422a02d.js"></script><link href="index.2f29481c69a28da79989.css" rel="stylesheet"></head>
+<script defer src="runtime.efeb25092b554dacd53e.js"></script><script defer src="index.51558b77d9f57087dd24.js"></script><script defer src="vendor.85b90a4ba47d4422a02d.js"></script><link href="index.42bbaa0671d27f7376d6.css" rel="stylesheet"></head>
 
 <body>
     <div id="title">
@@ -18,55 +18,72 @@
             <button class="sidebarbutton">Today</button>
             <button class="sidebarbutton">This Week</button>
             <h2>Projects</h2>
-            <button class="sidebarbutton" id="projectBtn">Add a Project</button>
-            <!-- <form action="">
-                <input type="text">
-                <button>add</button>
-            </form> -->
+            <div id="projectTitles">
 
+            </div>
+            <button class="sidebarbutton" id="projectBtn">Add a Project</button>
         </div>
+
+
         <div class="main">
-            <div class="project">
-                <h2>Project</h2>
-                <button>Delete</button>
-                <button>Add a Task</button>
+            <div class="card">
+                <h4>Name of Todo</h4>
+                <span>Priority color</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique hic doloribus officiis, distinctio
+                    provident nihil reiciendis ipsa sunt temporibus ipsum, eaque quidem harum incidunt suscipit nisi
+                    vuntur aut iure sed ullam,
+                    saepe porro dicta?.</p>
+                <span>12.06.2021</span>
+                <button>Remove</button>
             </div>
-            <!-- <div class="project">
-                <h2>Project</h2>
-                <h3>Task</h3>
-            </div>
-            <div class="project">
-                <h2>Project</h2>
-                <h3>Task</h3>
-            </div>
-            <div class="project">
-                <h2>Project</h2>
-                <h3>Task</h3>
-            </div>
-            <div class="project">
-                <h2>Project</h2>
-                <h3>Task</h3>
-            </div>
-            <div class="project">
-                <h2>Project</h2>
-                <h3>Task</h3>
-            </div>
-            <div class="project">
-                <h2>Project</h2>
-                <h3>Task</h3>
-            </div>
-            <div class="project">
-                <h2>Project</h2>
-                <h3>Task</h3>
-            </div>
-            <div class="project">
-                <h2>Project</h2>
-                <h3>Task</h3>
-            </div> -->
+
         </div>
 
     </div>
 
+
+    <div class="popupProject">
+        <!-- <form action="" id="projectForm">
+            <label for="projectTitle">Title</label>
+            <input type="text" id="projectTitle">
+
+            <input type="submit" name="submit" id="submit">
+        </form> -->
+
+    </div>
+
+
+
+
+
+    <div class="popupTask">
+        <div class="popdiv">
+            <form action="" id='todoform'>
+                <label for="titleInput">Title</label>
+                <input type="text" name="" id="titleInput">
+
+                <label for="priority">Priority</label>
+                <select name="priority" id="priority">
+                    <option value="low">low</option>
+                    <option value="medium">medium</option>
+                    <option value="heigh">heigh</option>
+                </select>
+
+
+                <label for="date">Date</label>
+                <input type="date" name="" id="date">
+
+
+                <label for="description">Description</label>
+                <textarea form="todoform" name="description" id="description" cols="40" rows="10"
+                    placeholder="Add Description"></textarea>
+
+                <button id="todoAdd">Add</button>
+            </form>
+            <button id="close">Close</button>
+
+        </div>
+    </div>
 
 </body>
 
