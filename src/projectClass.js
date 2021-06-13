@@ -32,16 +32,13 @@ export class Projects {
 export class Todo {
     constructor(title, priority, description, dueDate) {
         this.title = title
-        this.prioriy = priority
+        this.priority = priority
         this.description = description
         this.dueDate = dueDate
 
     }
-    newTodo(title, priority, description, dueDate) {
-        let p = new Project(title, priority, description, dueDate);
-        this.projects.push(p);
-        return p;
-    }
 
 }
+
+
 
