@@ -4,21 +4,44 @@ export class Project {
         this.todo = [];
 
     }
-    add(arr) {
-        arr.push(this)
+
+}
+
+export class Projects {
+    constructor() {
+        this.projects = [];
+    }
+
+    newProject(title) {
+        let p = new Project(title);
+        this.projects.push(p);
+        return p;
+    }
+
+    get allProjects() {
+        return this.projects;
+    }
+
+    get numberOfProjects() {
+        return this.projects.length;
     }
 }
 
 
+
 export class Todo {
-    constructor(title, description, dueDate, prioriy) {
+    constructor(title, priority, description, dueDate) {
         this.title = title
+        this.prioriy = priority
         this.description = description
         this.dueDate = dueDate
-        this.prioriy = prioriy
+
     }
-    projectadd(todoArr) {
-        todoArr.push(this)
+    newTodo(title, priority, description, dueDate) {
+        let p = new Project(title, priority, description, dueDate);
+        this.projects.push(p);
+        return p;
     }
+
 }
 
