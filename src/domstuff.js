@@ -1,4 +1,4 @@
-import { projectFormMaker } from './project'
+import { load, projectFormMaker } from './project'
 
 const btnProject = document.querySelector('#projectBtn');
 const popupProjectDiv = document.querySelector('.popupProject');

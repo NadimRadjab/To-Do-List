@@ -70,19 +70,11 @@ function projectFormMaker() {
 
 // Form Action function 
 function formAction(text) {
-    let number = 0
-
-
-    // adds 1 to a number for every project
-    let test = project.allProjects.forEach(project => {
-        number++
-    })
 
 
     let buttonAdd = document.querySelector('#addButton');
     buttonAdd.addEventListener('click', (e) => {
 
-        // todoForm.setAttribute('data-number', e.target.dataset.number);
 
         popupDiv.style.display = 'flex';
     })
@@ -91,18 +83,12 @@ function formAction(text) {
 
     let h3 = document.createElement('h3');
     h3.textContent = text;
-    h3.setAttribute('data-number', number)
     projectDiv.append(h3);
-
-
-
-
 
 
     // h3 event listner 
 
     h3.addEventListener('click', (e) => {
-
 
         buttonAdd.setAttribute('data-number', e.target.dataset.number);
 
@@ -117,7 +103,7 @@ function formAction(text) {
 
         contentDiv.innerHTML = ''
         let projectArr = project.allProjects
-        console.log(projectArr)
+
         for (let i = 0; i < projectArr.length; i++) {
             let title = projectArr[i].title
 
@@ -127,24 +113,17 @@ function formAction(text) {
 
 
                 if (e.target.classList.contains('active')) {
-                    console.log(i)
+
                     taskDisplayDiv(i,)
 
                     todoForm.className = title
                 }
 
 
-
             }
         }
 
     })
-
-
-
-
-
-
 
 
     // Adds the Project to the Project Class Container
@@ -225,9 +204,6 @@ function taskFormAction() {
 
 
 
-
-
-
 // Reset Form Function
 function taskFormReset(title, select, date, text) {
     title.value = ''
@@ -238,125 +214,11 @@ function taskFormReset(title, select, date, text) {
 
 
 
+
+
+
+
 // Display Function for the Todo Form on Submit
-
-// function taskDisplayForm(item) {
-
-//     let projectArr = project.allProjects[item.dataset.number].todo
-
-//     const todoDiv = document.createElement('div');
-//     todoDiv.classList.add('card');
-//     contentDiv.append(todoDiv);
-
-//     let h4 = document.createElement('h4');
-//     todoDiv.append(h4)
-//     let spanP = document.createElement('span');
-//     todoDiv.append(spanP)
-//     let p = document.createElement('p');
-//     todoDiv.append(p)
-//     let spanDate = document.createElement('span');
-//     todoDiv.append(spanDate)
-//     let deleteButton = document.createElement('button')
-//     deleteButton.textContent = 'delete'
-//     todoDiv.append(deleteButton)
-
-
-//     mouseOver(deleteButton);
-
-
-//     for (let i = 0; i < projectArr.length; i++) {
-
-
-
-//         // removeTask(deleteButton, projectArr, i)
-
-
-
-
-//         for (let k = 0; k < 4; k++) {
-
-//             switch (k) {
-//                 case 0:
-//                     h4.textContent = projectArr[i].title
-//                     break;
-//                 case 1:
-//                     spanP.innerHTML = projectArr[i].priority
-//                     break;
-//                 case 2:
-//                     p.textContent = projectArr[i].description
-//                     break;
-//                 case 3:
-//                     spanDate.textContent = projectArr[i].dueDate
-//                     break;
-
-//             }
-//         }
-
-//     }
-// }
-
-// Display Function for the main h3 eventlistner
-
-// function taskDisplayDiv(item) {
-
-//     let projectArr = project.allProjects[item.dataset.number].todo
-
-
-//     for (let i = 0; i < projectArr.length; i++) {
-
-//         const todoDiv = document.createElement('div');
-//         todoDiv.classList.add('card');
-//         contentDiv.append(todoDiv);
-//         let h4 = document.createElement('h4');
-//         todoDiv.append(h4)
-//         let spanP = document.createElement('span');
-//         todoDiv.append(spanP)
-//         let p = document.createElement('p');
-//         todoDiv.append(p)
-//         let spanDate = document.createElement('span');
-//         todoDiv.append(spanDate)
-//         let deleteButton = document.createElement('button')
-//         todoDiv.append(deleteButton)
-//         deleteButton.textContent = 'Delete'
-
-//         mouseOver(deleteButton);
-
-//         // removeTask(deleteButton, projectArr, i)
-//         deleteButton.addEventListener('click', (e) => {
-//             if (e.target.classList.contains('delete')) {
-//                 projectArr.splice(i, 1)
-//             }
-
-//             console.log(projectArr)
-//         })
-//         removeDiv(deleteButton)
-
-//         for (let k = 0; k < 4; k++) {
-
-
-//             switch (k) {
-//                 case 0:
-//                     h4.textContent = projectArr[i].title
-//                     break;
-//                 case 1:
-//                     spanP.innerHTML = projectArr[i].priority
-//                     break;
-//                 case 2:
-//                     p.textContent = projectArr[i].description
-//                     break;
-//                 case 3:
-//                     spanDate.textContent = projectArr[i].dueDate
-//                     break;
-
-//             }
-//         }
-
-//     }
-
-// }
-
-
-
 
 function taskDisplayForm(i) {
 
@@ -419,17 +281,7 @@ function taskDisplayForm(i) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+// Display Function for the main h3 eventlistner
 
 function taskDisplayDiv(i) {
 
@@ -457,16 +309,12 @@ function taskDisplayDiv(i) {
         deleteButton.textContent = 'Delete';
         deleteButton.className = projectTitle;
 
-        console.log(project.allProjects);
+
 
         removeTask(deleteButton, projectArr, i);
         buttonTaskAdd(deleteButton);
 
         mouseOver(deleteButton);
-
-
-
-
 
 
         for (let k = 0; k < 4; k++) {
@@ -509,7 +357,6 @@ function mouseOver(button,) {
 
 
 
-
 function removeTask(button, arr, i) {
 
     button.addEventListener('click', (e) => {
@@ -535,7 +382,7 @@ function buttonTaskAdd(button) {
             let title = projectArr[i].title
 
             if (e.currentTarget.classList.contains(title)) {
-                console.log(projectArr);
+
 
                 taskDisplayDiv(i);
 
@@ -545,11 +392,6 @@ function buttonTaskAdd(button) {
         }
     })
 };
-
-
-
-
-
 
 
 
