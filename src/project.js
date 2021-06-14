@@ -82,7 +82,7 @@ function formAction(text) {
     let buttonAdd = document.querySelector('#addButton');
     buttonAdd.addEventListener('click', (e) => {
 
-        todoForm.setAttribute('data-number', e.target.dataset.number);
+        // todoForm.setAttribute('data-number', e.target.dataset.number);
 
         popupDiv.style.display = 'flex';
     })
@@ -104,20 +104,46 @@ function formAction(text) {
     h3.addEventListener('click', (e) => {
 
 
-
         buttonAdd.setAttribute('data-number', e.target.dataset.number);
 
-        contentDiv.innerHTML = ''
         e.currentTarget.classList.toggle('active')
-        if (e.currentTarget.classList.contains('active')) {
-            taskDisplayDiv(e.target)
-        }
+        // if (e.currentTarget.classList.contains('active')) {
+
+        // }
 
         // Target the  h3 siblings
         let siblings = getSiblings(e.currentTarget);
         let siblingText = siblings.map(e => e.classList.remove('active'));
 
+        contentDiv.innerHTML = ''
+        let projectArr = project.allProjects
+        console.log(projectArr)
+        for (let i = 0; i < projectArr.length; i++) {
+            let title = projectArr[i].title
+
+
+
+            if (e.target.textContent === title) {
+
+
+                if (e.target.classList.contains('active')) {
+                    console.log(i)
+                    taskDisplayDiv(i,)
+
+                    todoForm.className = title
+                }
+
+
+
+            }
+        }
+
     })
+
+
+
+
+
 
 
 
@@ -163,22 +189,44 @@ todoForm.addEventListener('submit', (e) => {
 
 // TodoForm Inputs Function and new Todo Creation
 function taskFormAction() {
-    let num = 0
-    num++
+
+
     let buttonAdd = document.querySelector('#addButton');
-    buttonAdd.setAttribute('data-number', num)
+    buttonAdd.setAttribute('data-number', 0)
     const titleInput = document.querySelector('#titleInput');
     const selectInput = document.querySelector('#priority');
     const dateInput = document.querySelector('#date');
     const textInput = document.querySelector('#description');
 
-    project.allProjects[todoForm.dataset.number].todo.push(new Todo(titleInput.value, selectInput.value, textInput.value, dateInput.value));
 
-    taskDisplayForm(todoForm);
+
+    let projectArr = project.allProjects
+
+
+    for (let i = 0; i < projectArr.length; i++) {
+        let title = projectArr[i].title
+        if (todoForm.classList.contains(title)) {
+
+
+            project.allProjects[i].todo.push(new Todo(titleInput.value, selectInput.value, textInput.value, dateInput.value));
+
+            taskDisplayForm(i)
+        }
+
+    }
+
+
+    // taskDisplayForm(todoForm);
     taskFormReset(titleInput, selectInput, dateInput, textInput)
 
 
 }
+
+
+
+
+
+
 
 // Reset Form Function
 function taskFormReset(title, select, date, text) {
@@ -192,39 +240,155 @@ function taskFormReset(title, select, date, text) {
 
 // Display Function for the Todo Form on Submit
 
-function taskDisplayForm(item) {
+// function taskDisplayForm(item) {
 
-    let projectArr = project.allProjects[item.dataset.number].todo
+//     let projectArr = project.allProjects[item.dataset.number].todo
+
+//     const todoDiv = document.createElement('div');
+//     todoDiv.classList.add('card');
+//     contentDiv.append(todoDiv);
+
+//     let h4 = document.createElement('h4');
+//     todoDiv.append(h4)
+//     let spanP = document.createElement('span');
+//     todoDiv.append(spanP)
+//     let p = document.createElement('p');
+//     todoDiv.append(p)
+//     let spanDate = document.createElement('span');
+//     todoDiv.append(spanDate)
+//     let deleteButton = document.createElement('button')
+//     deleteButton.textContent = 'delete'
+//     todoDiv.append(deleteButton)
+
+
+//     mouseOver(deleteButton);
+
+
+//     for (let i = 0; i < projectArr.length; i++) {
+
+
+
+//         // removeTask(deleteButton, projectArr, i)
+
+
+
+
+//         for (let k = 0; k < 4; k++) {
+
+//             switch (k) {
+//                 case 0:
+//                     h4.textContent = projectArr[i].title
+//                     break;
+//                 case 1:
+//                     spanP.innerHTML = projectArr[i].priority
+//                     break;
+//                 case 2:
+//                     p.textContent = projectArr[i].description
+//                     break;
+//                 case 3:
+//                     spanDate.textContent = projectArr[i].dueDate
+//                     break;
+
+//             }
+//         }
+
+//     }
+// }
+
+// Display Function for the main h3 eventlistner
+
+// function taskDisplayDiv(item) {
+
+//     let projectArr = project.allProjects[item.dataset.number].todo
+
+
+//     for (let i = 0; i < projectArr.length; i++) {
+
+//         const todoDiv = document.createElement('div');
+//         todoDiv.classList.add('card');
+//         contentDiv.append(todoDiv);
+//         let h4 = document.createElement('h4');
+//         todoDiv.append(h4)
+//         let spanP = document.createElement('span');
+//         todoDiv.append(spanP)
+//         let p = document.createElement('p');
+//         todoDiv.append(p)
+//         let spanDate = document.createElement('span');
+//         todoDiv.append(spanDate)
+//         let deleteButton = document.createElement('button')
+//         todoDiv.append(deleteButton)
+//         deleteButton.textContent = 'Delete'
+
+//         mouseOver(deleteButton);
+
+//         // removeTask(deleteButton, projectArr, i)
+//         deleteButton.addEventListener('click', (e) => {
+//             if (e.target.classList.contains('delete')) {
+//                 projectArr.splice(i, 1)
+//             }
+
+//             console.log(projectArr)
+//         })
+//         removeDiv(deleteButton)
+
+//         for (let k = 0; k < 4; k++) {
+
+
+//             switch (k) {
+//                 case 0:
+//                     h4.textContent = projectArr[i].title
+//                     break;
+//                 case 1:
+//                     spanP.innerHTML = projectArr[i].priority
+//                     break;
+//                 case 2:
+//                     p.textContent = projectArr[i].description
+//                     break;
+//                 case 3:
+//                     spanDate.textContent = projectArr[i].dueDate
+//                     break;
+
+//             }
+//         }
+
+//     }
+
+// }
+
+
+
+
+function taskDisplayForm(i) {
+
+
+    let projectArr = project.allProjects[i].todo;
+    let projectTitle = project.allProjects[i].title;
 
     const todoDiv = document.createElement('div');
     todoDiv.classList.add('card');
     contentDiv.append(todoDiv);
-
     let h4 = document.createElement('h4');
-    todoDiv.append(h4)
+    todoDiv.append(h4);
     let spanP = document.createElement('span');
-    todoDiv.append(spanP)
+    todoDiv.append(spanP);
     let p = document.createElement('p');
-    todoDiv.append(p)
+    todoDiv.append(p);
     let spanDate = document.createElement('span');
-    todoDiv.append(spanDate)
-    let deleteButton = document.createElement('button')
-
-    deleteButton.setAttribute('data-number', projectArr.length - 1)
-    deleteButton.addEventListener('mouseover', (e) => {
-        deleteButton.classList.toggle('delete')
-    })
-    deleteButton.addEventListener('mouseout', (e) => {
-        deleteButton.classList.toggle('delete')
-    })
-    deleteButton.textContent = 'Delete'
-    todoDiv.append(deleteButton)
-    deleteButton.addEventListener('click', (e) => {
-        console.log('hello')
-    })
+    todoDiv.append(spanDate);
+    let deleteButton = document.createElement('button');
+    todoDiv.append(deleteButton);
+    deleteButton.textContent = 'Delete';
+    deleteButton.className = projectTitle;
 
 
-    for (let i = 0; i < projectArr.length; i++) {
+
+    for (i = 0; i < projectArr.length; i++) {
+
+        removeTask(deleteButton, projectArr, i)
+        buttonTaskAdd(deleteButton)
+
+        mouseOver(deleteButton);
+
 
 
 
@@ -233,31 +397,49 @@ function taskDisplayForm(item) {
 
             switch (k) {
                 case 0:
-                    h4.textContent = projectArr[i].title
+                    h4.textContent = projectArr[i].title;
                     break;
                 case 1:
-                    spanP.innerHTML = projectArr[i].priority
+                    spanP.innerHTML = projectArr[i].priority;
                     break;
                 case 2:
-                    p.textContent = projectArr[i].description
+                    p.textContent = projectArr[i].description;
                     break;
                 case 3:
-                    spanDate.textContent = projectArr[i].dueDate
+                    spanDate.textContent = projectArr[i].dueDate;
                     break;
-
             }
         }
+
+
     }
 }
 
-// Display Function for the main h3 eventlistner
-function taskDisplayDiv(item) {
 
-    let projectArr = project.allProjects[item.dataset.number].todo
 
-    // console.log(projectArr)
-    let num = 0
-    for (let i = 0; i < projectArr.length; i++) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function taskDisplayDiv(i) {
+
+
+    let projectArr = project.allProjects[i].todo
+    let projectTitle = project.allProjects[i].title
+    console.log(projectArr)
+
+    for (i = 0; i < projectArr.length; i++) {
+
 
         const todoDiv = document.createElement('div');
         todoDiv.classList.add('card');
@@ -272,61 +454,106 @@ function taskDisplayDiv(item) {
         todoDiv.append(spanDate)
         let deleteButton = document.createElement('button')
         todoDiv.append(deleteButton)
-        num++
+        deleteButton.textContent = 'Delete';
+        deleteButton.className = projectTitle;
+
+        console.log(project.allProjects);
+
+        removeTask(deleteButton, projectArr, i);
+        buttonTaskAdd(deleteButton);
+
+        mouseOver(deleteButton);
 
 
 
-        deleteButton.setAttribute('data-number', projectArr.length - 1)
-        deleteButton.addEventListener('mouseover', (e) => {
-            deleteButton.classList.toggle('delete')
-        })
-        deleteButton.addEventListener('mouseout', (e) => {
-            deleteButton.classList.toggle('delete')
-        })
 
 
-        deleteButton.setAttribute('data-number', num - 1)
-
-        deleteButton.textContent = 'Delete'
-        deleteButton.addEventListener('click', (e) => {
-
-            if (e.target.classList.contains('delete')) {
-                projectArr.splice(i, 1)
-            }
-            // projectArr.splice(e.target.dataset.number, 1)
-            console.log(projectArr)
-        })
 
         for (let k = 0; k < 4; k++) {
 
 
             switch (k) {
                 case 0:
-                    h4.textContent = projectArr[i].title
+                    h4.textContent = projectArr[i].title;
                     break;
                 case 1:
-                    spanP.innerHTML = projectArr[i].priority
+                    spanP.innerHTML = projectArr[i].priority;
                     break;
                 case 2:
-                    p.textContent = projectArr[i].description
+                    p.textContent = projectArr[i].description;
                     break;
                 case 3:
-                    spanDate.textContent = projectArr[i].dueDate
+                    spanDate.textContent = projectArr[i].dueDate;
                     break;
-
             }
         }
 
+
     }
-
 }
 
 
 
 
-function removeTask(item) {
-    let projectArr = project.allProjects[item.dataset.number].todo
-}
+function mouseOver(button,) {
+    button.addEventListener('mouseover', (e) => {
+        button.classList.toggle('delete');
+
+    });
+    button.addEventListener('mouseout', (e) => {
+        button.classList.toggle('delete');
+    });
+
+    return button;
+};
+
+
+
+
+function removeTask(button, arr, i) {
+
+    button.addEventListener('click', (e) => {
+        contentDiv.innerHTML = ''
+
+        if (e.currentTarget.classList.contains('delete')) {
+
+            arr.splice(i, 1);
+
+
+
+
+        }
+    })
+};
+
+function buttonTaskAdd(button) {
+
+    button.addEventListener('click', (e) => {
+
+        let projectArr = project.allProjects
+        for (let i = 0; i < projectArr.length; i++) {
+            let title = projectArr[i].title
+
+            if (e.currentTarget.classList.contains(title)) {
+                console.log(projectArr);
+
+                taskDisplayDiv(i);
+
+            }
+
+
+        }
+    })
+};
+
+
+
+
+
+
+
+
+
 
 
 export { projectFormMaker }
