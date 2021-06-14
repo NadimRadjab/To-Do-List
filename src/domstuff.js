@@ -1,14 +1,14 @@
-import { formMaker } from './project'
+import { projectFormMaker } from './project'
 
 const btnProject = document.querySelector('#projectBtn');
 const popupProjectDiv = document.querySelector('.popupProject');
 
 
-function test() {
+function addProject() {
     btnProject.addEventListener('click', () => {
         popupProjectDiv.style.display = 'flex'
-        formMaker()
-        btnProject.disabled = true;
+        projectFormMaker()
+
     })
 
 
@@ -17,4 +17,4 @@ function test() {
 }
 
 
-export { test }
+export { addProject }

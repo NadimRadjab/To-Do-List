@@ -1,4 +1,4 @@
-export class Project {
+class Project {
     constructor(title) {
         this.title = title
         this.todo = [];
@@ -7,7 +7,7 @@ export class Project {
 
 }
 
-export class Projects {
+class Projects {
     constructor() {
         this.projects = [];
     }
@@ -26,6 +26,9 @@ export class Projects {
         return this.projects.length;
     }
 }
+
+export let project = new Projects();
+
 
 
 

@@ -1,9 +1,8 @@
 import './style.css';
-import { test } from './domstuff'
-import { projectArr } from './project';
+import { addProject } from './domstuff'
 
-test()
 
+addProject()
 // console.log('hello')
 
 
