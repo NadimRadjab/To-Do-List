@@ -33,11 +33,11 @@ export let project = new Projects();
 
 
 export class Todo {
-    constructor(title, priority, description, dueDate) {
+    constructor(title, priority, description, date) {
         this.title = title
         this.priority = priority
         this.description = description
-        this.dueDate = dueDate
+        this.date = date
 
     }
 

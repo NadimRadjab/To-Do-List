@@ -17,6 +17,10 @@ const popupDiv = document.querySelector('.popupTask');
 const todoForm = document.querySelector('#todoform');
 
 const closeBtn = document.querySelector('#close');
+sideBar.addEventListener('click', (e) => {
+    sideBar.classList.remove('active');
+});
+
 
 closeBtn.addEventListener('click', (e) => {
     closePopups()
@@ -31,6 +35,8 @@ function closePopups() {
     popupProjectDiv.style.display = 'none'
 
 }
+popupDiv.addEventListener('click', closePopups);
+
 
 
 
@@ -39,8 +45,13 @@ function projectFormMaker() {
 
     const form = document.createElement('form');
     form.setAttribute('action', 'submit');
-    form.classList.add('projectForm')
+    form.classList.add('projectForm');
 
+    popupProjectDiv.addEventListener('click', () => {
+        form.remove();
+        closePopups();
+
+    })
 
     // Event listner
     form.addEventListener('submit', (e) => {
@@ -52,6 +63,13 @@ function projectFormMaker() {
 
 
     });
+    form.addEventListener('click', (e) => {
+
+        e.stopPropagation()
+
+
+    })
+
 
     const text = document.createElement('input');
     text.setAttribute('type', 'text',);
@@ -94,6 +112,7 @@ function formAction(text) {
     // Main h3 holds the project title
 
     let h3 = document.createElement('h3');
+    h3.classList.add('test')
     h3.textContent = text;
     projectDiv.append(h3);
     let spanDelete = document.createElement('span');
@@ -102,20 +121,27 @@ function formAction(text) {
     removeProject(spanDelete, h2Title)
 
 
+
+    document.addEventListener('click', (e) => {
+        let isClickInsideElement = h3.contains(e.target);
+        if (!isClickInsideElement) {
+            h3.classList.remove('active')
+        }
+    });
     // h3 event listner 
 
     h3.addEventListener('click', (e) => {
+        e.stopPropagation();
+        spanDelete.className = e.target.textContent;
 
-        spanDelete.className = e.target.textContent
-
-        e.currentTarget.classList.toggle('active')
+        e.currentTarget.classList.toggle('active');
 
         // Target the  h3 siblings
         let siblings = getSiblings(e.currentTarget);
         let siblingText = siblings.map(e => e.classList.remove('active'));
 
-        contentDiv.innerHTML = ''
-        let projectArr = project.allProjects
+        contentDiv.innerHTML = '';
+        let projectArr = project.allProjects;
 
         for (let i = 0; i < projectArr.length; i++) {
             let title = projectArr[i].title
@@ -172,6 +198,7 @@ let getSiblings = function (e) {
 // TodoForm Eventlisnter
 todoForm.addEventListener('submit', (e) => {
     e.preventDefault();
+
     taskFormAction();
     closePopups();
 
@@ -184,11 +211,12 @@ function taskFormAction() {
 
 
     let buttonAdd = document.querySelector('#addButton');
-    buttonAdd.setAttribute('data-number', 0)
+
     const titleInput = document.querySelector('#titleInput');
     const selectInput = document.querySelector('#priority');
     const dateInput = document.querySelector('#date');
     const textInput = document.querySelector('#description');
+
 
 
     let projectArr = project.allProjects
@@ -197,18 +225,16 @@ function taskFormAction() {
     for (let i = 0; i < projectArr.length; i++) {
         let title = projectArr[i].title
         if (todoForm.classList.contains(title)) {
-
-
             project.allProjects[i].todo.push(new Todo(titleInput.value, selectInput.value, textInput.value, dateInput.value));
 
-            taskDisplayForm(i)
+            taskDisplayDiv(i)
         }
 
     }
 
 
     // taskDisplayForm(todoForm);
-    taskFormReset(titleInput, selectInput, dateInput, textInput)
+    // taskFormReset(titleInput, selectInput, dateInput, textInput)
 
 
 }
@@ -228,59 +254,67 @@ function taskFormReset(title, select, date, text) {
 
 // Display Function for the Todo Form on Submit
 
-function taskDisplayForm(i) {
+// function taskDisplayForm(i) {
 
-
-    let projectArr = project.allProjects[i].todo;
-    let projectTitle = project.allProjects[i].title;
-
-    const todoDiv = document.createElement('div');
-    todoDiv.classList.add('card');
-    contentDiv.append(todoDiv);
-    let h4 = document.createElement('h4');
-    todoDiv.append(h4);
-    let spanP = document.createElement('span');
-    todoDiv.append(spanP);
-    let p = document.createElement('p');
-    p.classList.add('cardSpan')
-    todoDiv.append(p);
-    let spanDate = document.createElement('span');
-    todoDiv.append(spanDate);
-    let deleteButton = document.createElement('button');
-    todoDiv.append(deleteButton);
-    deleteButton.textContent = 'X';
-    deleteButton.className = projectTitle;
+//     let projectArr = project.allProjects[i].todo;
+//     let projectTitle = project.allProjects[i].title;
 
 
 
-    for (i = 0; i < projectArr.length; i++) {
-
-        removeTask(deleteButton, projectArr, i)
-        buttonTaskAdd(deleteButton)
-        mouseOver(deleteButton);
-
-        for (let k = 0; k < 4; k++) {
+//     for (i = 0; i < projectArr.length; i++) {
 
 
-            switch (k) {
-                case 0:
-                    h4.textContent = projectArr[i].title;
-                    break;
-                case 1:
-                    spanP.innerHTML = projectArr[i].priority;
-                    break;
-                case 2:
-                    p.textContent = projectArr[i].description;
-                    break;
-                case 3:
-                    spanDate.textContent = projectArr[i].dueDate;
-                    break;
-            }
-        }
 
 
-    }
-}
+
+
+//         const todoDiv = document.createElement('div');
+//         todoDiv.classList.add('card');
+//         contentDiv.append(todoDiv);
+//         let h4 = document.createElement('h4');
+//         todoDiv.append(h4);
+//         let spanP = document.createElement('span');
+//         todoDiv.append(spanP);
+//         let p = document.createElement('p');
+//         p.classList.add('cardSpan')
+//         todoDiv.append(p);
+//         let spanDate = document.createElement('span');
+//         todoDiv.append(spanDate);
+//         let deleteButton = document.createElement('button');
+//         todoDiv.append(deleteButton);
+//         deleteButton.textContent = 'X';
+//         deleteButton.className = projectTitle;
+
+
+
+
+
+//         removeTask(deleteButton, projectArr, i)
+//         buttonTaskAdd(deleteButton)
+//         mouseOver(deleteButton);
+
+//         for (let k = 0; k < 4; k++) {
+
+
+//             switch (k) {
+//                 case 0:
+//                     h4.textContent = projectArr[i].title;
+//                     break;
+//                 case 1:
+//                     spanP.innerHTML = projectArr[i].priority;
+//                     break;
+//                 case 2:
+//                     p.textContent = projectArr[i].description;
+//                     break;
+//                 case 3:
+//                     spanDate.textContent = projectArr[i].date;
+//                     break;
+//             }
+//         }
+
+
+//     }
+// }
 
 
 
@@ -337,7 +371,7 @@ function taskDisplayDiv(i) {
                     p.textContent = projectArr[i].description;
                     break;
                 case 3:
-                    spanDate.textContent = projectArr[i].dueDate;
+                    spanDate.textContent = projectArr[i].date;
                     break;
             }
         }
@@ -425,7 +459,7 @@ function buttonTaskAdd(button,) {
 
 
 
-export { projectFormMaker }
+export { projectFormMaker, todoForm, popupProjectDiv, contentDiv, popupDiv }
 
 
 

@@ -1,10 +1,10 @@
 import './style.css';
 
-import { addProject } from './domstuff'
+import { addProject, addInboxTask } from './domstuff'
 
 
 addProject()
-
+addInboxTask()
 // console.log('hello')
 
 
