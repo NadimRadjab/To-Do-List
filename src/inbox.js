@@ -1,5 +1,7 @@
 import { task } from "./dailyTaskClass";
-import { contentDiv, todoForm, popupDiv } from "./project"
+import { contentDiv, todoForm, popupDiv, mouseOver } from "./project"
+import { isThisWeek, parseISO } from './vendor'
+
 
 
 
@@ -12,8 +14,12 @@ buttonAdd.addEventListener('click', (e) => {
 
 function inboxCreation() {
     todoForm.addEventListener('submit', (e) => {
-        e.preventDefault();
         taskFormAction();
+
+        e.stopPropagation();
+        e.preventDefault();
+
+
         // closePopups();
 
 
@@ -21,7 +27,19 @@ function inboxCreation() {
 
 }
 
+function time() {
+    let taskArr = task.allTasks;
+    for (let i = 0; i < taskArr.length; i++) {
+        let time = parseISO(taskArr[i].date)
 
+        console.log(time)
+        if (isThisWeek(time) === true) {
+            console.log('Hello')
+        }
+
+    }
+
+}
 
 function taskFormAction() {
 
@@ -41,23 +59,22 @@ function taskFormAction() {
     if (todoForm.classList.contains('Inbox')) {
 
         task.newTask(title, selectInput.value, textInput.value, dateInput.value);
-
+        taskDisplayInbox();
+        taskFormReset(titleInput, selectInput, dateInput, textInput);
 
     }
 
 
-    taskDisplayInbox()
-    // taskFormReset(titleInput, selectInput, dateInput, textInput)
+
 
 
 }
 function taskFormReset(title, select, date, text) {
-    title.value = ''
-    select.value = ''
-    date.value = ''
-    text.value = ''
+    title.value = '';
+    select.value = '';
+    date.value = '';
+    text.value = '';
 }
-
 
 
 
@@ -66,18 +83,11 @@ function taskFormReset(title, select, date, text) {
 
 function taskDisplayInbox(i) {
 
-
-
-    let taskArr = task.allTasks
-    let taskArrTitle = task.allTasks.title;
+    let taskArr = task.allTasks;
 
 
     for (i = 0; i < taskArr.length; i++) {
-
-
-
-
-
+        time()
 
         console.log(taskArr)
         const todoDiv = document.createElement('div');
@@ -95,12 +105,11 @@ function taskDisplayInbox(i) {
         let deleteButton = document.createElement('button');
         todoDiv.append(deleteButton);
         deleteButton.textContent = 'X';
-        deleteButton.className = taskArrTitle;
+        deleteButton.className = taskArr[i].title;
 
 
-        // removeTask(deleteButton, projectArr, i)
-        // buttonTaskAdd(deleteButton)
-        // mouseOver(deleteButton);
+        removeTask(deleteButton)
+        mouseOver(deleteButton);
 
         for (let k = 0; k < 4; k++) {
 
@@ -124,6 +133,26 @@ function taskDisplayInbox(i) {
 
     }
 }
+
+
+function removeTask(span) {
+    let taskArr = task.allTasks;
+    span.addEventListener('click', (e) => {
+        for (let i = 0; i < taskArr.length; i++) {
+            let title = taskArr[i].title;
+            if (e.target.classList.contains(title)) {
+
+                e.target.parentNode.remove();
+                console.log(taskArr);
+                taskArr.splice(i, 1);
+            }
+
+        }
+
+
+    });
+}
+
 
 
 export { inboxCreation, taskDisplayInbox }
