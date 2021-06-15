@@ -39,6 +39,7 @@ function projectFormMaker() {
 
     const form = document.createElement('form');
     form.setAttribute('action', 'submit');
+    form.classList.add('projectForm')
 
 
     // Event listner
@@ -53,17 +54,30 @@ function projectFormMaker() {
     });
 
     const text = document.createElement('input');
-    text.setAttribute('type', 'text');
+    text.setAttribute('type', 'text',);
     text.setAttribute('name', 'Title');
+    text.setAttribute('placeholder', 'Title');
+    text.setAttribute('maxlength', '13')
 
 
     const submit = document.createElement('input');
+    submit.textContent = 'Add';
     submit.setAttribute('type', 'submit');
     submit.setAttribute("value", "Submit");
+
+    const cancelBtn = document.createElement('button');
+    cancelBtn.setAttribute('type', 'button');
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.addEventListener('click', () => {
+        form.remove();
+        closePopups();
+    })
+
 
     popupProjectDiv.append(form);
     form.append(text);
     form.append(submit);
+    form.append(cancelBtn);
 
 }
 
@@ -74,8 +88,6 @@ function formAction(text) {
 
     let buttonAdd = document.querySelector('#addButton');
     buttonAdd.addEventListener('click', (e) => {
-
-
         popupDiv.style.display = 'flex';
     })
 
@@ -84,6 +96,9 @@ function formAction(text) {
     let h3 = document.createElement('h3');
     h3.textContent = text;
     projectDiv.append(h3);
+    let spanDelete = document.createElement('span');
+    spanDelete.textContent = 'X'
+    h3.append(spanDelete)
 
 
     // h3 event listner 
@@ -178,7 +193,6 @@ function taskFormAction() {
     const textInput = document.querySelector('#description');
 
 
-
     let projectArr = project.allProjects
 
 
@@ -203,7 +217,6 @@ function taskFormAction() {
 
 
 
-
 // Reset Form Function
 function taskFormReset(title, select, date, text) {
     title.value = ''
@@ -211,9 +224,6 @@ function taskFormReset(title, select, date, text) {
     date.value = ''
     text.value = ''
 }
-
-
-
 
 
 
@@ -234,12 +244,13 @@ function taskDisplayForm(i) {
     let spanP = document.createElement('span');
     todoDiv.append(spanP);
     let p = document.createElement('p');
+    p.classList.add('cardSpan')
     todoDiv.append(p);
     let spanDate = document.createElement('span');
     todoDiv.append(spanDate);
     let deleteButton = document.createElement('button');
     todoDiv.append(deleteButton);
-    deleteButton.textContent = 'Delete';
+    deleteButton.textContent = 'X';
     deleteButton.className = projectTitle;
 
 
@@ -248,11 +259,7 @@ function taskDisplayForm(i) {
 
         removeTask(deleteButton, projectArr, i)
         buttonTaskAdd(deleteButton)
-
         mouseOver(deleteButton);
-
-
-
 
         for (let k = 0; k < 4; k++) {
 
@@ -301,12 +308,13 @@ function taskDisplayDiv(i) {
         let spanP = document.createElement('span');
         todoDiv.append(spanP)
         let p = document.createElement('p');
+        p.classList.add('cardSpan')
         todoDiv.append(p)
         let spanDate = document.createElement('span');
         todoDiv.append(spanDate)
         let deleteButton = document.createElement('button')
         todoDiv.append(deleteButton)
-        deleteButton.textContent = 'Delete';
+        deleteButton.textContent = 'X';
         deleteButton.className = projectTitle;
 
 
