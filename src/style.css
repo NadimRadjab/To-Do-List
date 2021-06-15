@@ -374,16 +374,28 @@ select:focus{
 
 
 /* Add Button Main */
+.upperContent{
+    display: flex;
+    flex-direction: row;
+    width: 500px;
+    justify-content:space-between ;
+   
+}
+.upperContent>h2{
+    align-self: flex-start;
+    justify-self: flex-start;
+    font-size: 40px;
+}
+
 #addButton{
     background-color: #e55934; /* Green */
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
   border: none;
   color: white;
-  font-size: 80px;
+  font-size: 60px;
   margin: 10px;
- 
-    border-radius: 50%;
+   border-radius: 50%;
 }
 
 /* TodoDiv */

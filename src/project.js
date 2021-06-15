@@ -85,7 +85,7 @@ function projectFormMaker() {
 // Form Action function 
 function formAction(text) {
 
-
+    let h2Title = document.querySelector('#displayTitle')
     let buttonAdd = document.querySelector('#addButton');
     buttonAdd.addEventListener('click', (e) => {
         popupDiv.style.display = 'flex';
@@ -99,18 +99,16 @@ function formAction(text) {
     let spanDelete = document.createElement('span');
     spanDelete.textContent = 'X'
     h3.append(spanDelete)
+    removeProject(spanDelete, h2Title)
 
 
     // h3 event listner 
 
     h3.addEventListener('click', (e) => {
 
-        buttonAdd.setAttribute('data-number', e.target.dataset.number);
+        spanDelete.className = e.target.textContent
 
         e.currentTarget.classList.toggle('active')
-        // if (e.currentTarget.classList.contains('active')) {
-
-        // }
 
         // Target the  h3 siblings
         let siblings = getSiblings(e.currentTarget);
@@ -124,14 +122,14 @@ function formAction(text) {
 
 
 
-            if (e.target.textContent === title) {
+            if (e.target.textContent === title + 'X') {
 
-
+                h2Title.textContent = title
                 if (e.target.classList.contains('active')) {
-
+                    todoForm.className = title
                     taskDisplayDiv(i,)
 
-                    todoForm.className = title
+
                 }
 
 
@@ -295,7 +293,7 @@ function taskDisplayDiv(i) {
 
     let projectArr = project.allProjects[i].todo
     let projectTitle = project.allProjects[i].title
-    console.log(projectArr)
+
 
     for (i = 0; i < projectArr.length; i++) {
 
@@ -364,6 +362,26 @@ function mouseOver(button,) {
 };
 
 
+function removeProject(span, h2) {
+    let projectArr = project.allProjects
+    span.addEventListener('click', (e) => {
+        h2.textContent = ''
+        for (let i = 0; i < projectArr.length; i++) {
+            let title = projectArr[i].title
+            if (e.target.classList.contains(title + "X")) {
+
+                e.target.parentNode.remove()
+                console.log(projectArr)
+                projectArr.splice(i, 1)
+            }
+
+        }
+
+
+    });
+}
+
+
 
 function removeTask(button, arr, i) {
 
@@ -381,9 +399,10 @@ function removeTask(button, arr, i) {
     })
 };
 
-function buttonTaskAdd(button) {
+function buttonTaskAdd(button,) {
 
     button.addEventListener('click', (e) => {
+
 
         let projectArr = project.allProjects
         for (let i = 0; i < projectArr.length; i++) {
