@@ -3,7 +3,7 @@ import { Todo, project } from './projectClass'
 
 
 // Dom Selections
-const mainDiv = document.querySelector('.main');
+
 const sideBar = document.querySelector('.sideBar');
 
 const projectDiv = document.querySelector('#projectTitles');

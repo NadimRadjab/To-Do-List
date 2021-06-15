@@ -19,27 +19,11 @@ function inboxCreation() {
         e.stopPropagation();
         e.preventDefault();
 
-
-        // closePopups();
-
-
     })
 
 }
 
-function time() {
-    let taskArr = task.allTasks;
-    for (let i = 0; i < taskArr.length; i++) {
-        let time = parseISO(taskArr[i].date)
 
-        console.log(time)
-        if (isThisWeek(time) === true) {
-            console.log('Hello')
-        }
-
-    }
-
-}
 
 function taskFormAction() {
 
@@ -52,7 +36,7 @@ function taskFormAction() {
     const textInput = document.querySelector('#description');
     let title = titleInput.value
 
-    console.log(title)
+
 
     let taskArr = task.allTasks
 
@@ -87,7 +71,7 @@ function taskDisplayInbox(i) {
 
 
     for (i = 0; i < taskArr.length; i++) {
-        time()
+
 
         console.log(taskArr)
         const todoDiv = document.createElement('div');
