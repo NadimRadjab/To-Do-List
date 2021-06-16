@@ -1,5 +1,7 @@
 import { task } from "./dailyTaskClass";
 import { contentDiv, todoForm, popupDiv, mouseOver } from "./project"
+import { trackingWeek, weekNumber } from './thisWeek';
+import { isThisWeek, parseISO } from './vendor';
 
 
 
@@ -13,10 +15,14 @@ buttonAdd.addEventListener('click', (e) => {
 
 function inboxCreation() {
     todoForm.addEventListener('submit', (e) => {
-        taskFormAction();
 
+        taskFormAction();
+        // trackingWeek();
+        weekNumber.add();
+        weekNumber.numbers;
         e.stopPropagation();
         e.preventDefault();
+
 
     })
 
@@ -136,12 +142,25 @@ function mouseTest(button) {
 // Function Edits the timeInput
 function edit(input) {
     let taskArr = task.allTasks;
+
     input.addEventListener('mouseleave', (e) => {
+        weekNumber.subtraction();
         for (let i = 0; i < taskArr.length; i++) {
             let title = taskArr[i].title.replace(/\s/g, '$');
             console.log(taskArr[i])
             if (e.target.classList.contains(title)) {
                 taskArr[i].date = input.value;
+
+
+                // let time = parseISO(input.value);
+                // if (isThisWeek(time) === false) {
+                //     console.log(number)
+                //     number--
+                //     trackingWeek(number);
+
+                // }
+
+
             }
 
         };

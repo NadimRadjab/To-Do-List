@@ -6,8 +6,111 @@ import { isThisWeek, parseISO } from './vendor';
 
 
 
+// Function tracking how many task we have in the same week
+function trackingWeek(number) {
+
+    number = 0;
+
+    let taskArr = task.allTasks;
+    for (let i = 0; i < taskArr.length; i++) {
+        number++
+
+        let time = parseISO(taskArr[i].date);
+        if (isThisWeek(time) === true) {
+
+            tracker.textContent = number;
+        }
+    }
 
 
+    let projectArr = project.allProjects;
+    for (let j = 0; j < projectArr.length; j++) {
+        let todoArr = projectArr[j].todo;
+
+        for (let i = 0; i < todoArr.length; i++) {
+            number++
+            let time = parseISO(todoArr[i].date)
+            if (isThisWeek(time) === true) {
+                tracker.textContent = number;
+            }
+        }
+    }
+    console.log(number)
+    return number;
+
+}
+const tracker = document.querySelector('#tracking')
+
+class Tracker {
+    constructor() {
+        this.number = 0
+    }
+
+    add() {
+        let taskArr = task.allTasks;
+        for (let i = 0; i < taskArr.length; i++) {
+
+
+            let timeTask = parseISO(taskArr[i].date);
+            if (isThisWeek(timeTask) === true) {
+                this.number++
+                tracker.textContent = this.number;
+            }
+        }
+
+
+        // let projectArr = project.allProjects;
+        // for (let j = 0; j < projectArr.length; j++) {
+        //     let todoArr = projectArr[j].todo;
+
+        //     for (let i = 0; i < todoArr.length; i++) {
+
+        //         let timeProject = parseISO(todoArr[i].date)
+        //         if (isThisWeek(timeProject) === true) {
+        //             this.number++
+        //             tracker.textContent = this.number;
+        //         }
+        //     }
+        // }
+
+    }
+
+    subtraction() {
+        let taskArr = task.allTasks;
+        for (let i = 0; i < taskArr.length; i++) {
+
+
+            let timeTask = parseISO(taskArr[i].date);
+            if (isThisWeek(timeTask) === false) {
+                this.number--
+                tracker.textContent = this.number;
+            }
+        }
+
+
+        // let projectArr = project.allProjects;
+        // for (let j = 0; j < projectArr.length; j++) {
+        //     let todoArr = projectArr[j].todo;
+
+        //     for (let i = 0; i < todoArr.length; i++) {
+
+        //         let timeProject = parseISO(todoArr[i].date)
+        //         if (isThisWeek(timeProject) === false) {
+        //             this.number--
+        //             tracker.textContent = this.number;
+        //         }
+        //     }
+        // }
+
+    }
+    get numbers() {
+        return console.log(this)
+    }
+
+
+}
+
+export let weekNumber = new Tracker()
 
 
 
@@ -19,6 +122,7 @@ function taskDisplayTasks() {
     for (let i = 0; i < taskArr.length; i++) {
         let time = parseISO(taskArr[i].date)
         if (isThisWeek(time) === true) {
+
 
             const todoDiv = document.createElement('div');
             todoDiv.classList.add('card');
@@ -74,6 +178,7 @@ function projectTaskDisplay() {
         for (let i = 0; i < todoArr.length; i++) {
             let time = parseISO(todoArr[i].date)
             if (isThisWeek(time) === true) {
+
                 const todoDiv = document.createElement('div');
                 todoDiv.classList.add('card');
                 contentDiv.append(todoDiv);
@@ -120,4 +225,4 @@ function projectTaskDisplay() {
 
 
 
-export { taskDisplayTasks, projectTaskDisplay }
+export { taskDisplayTasks, projectTaskDisplay, trackingWeek }

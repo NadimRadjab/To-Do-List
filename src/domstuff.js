@@ -1,6 +1,6 @@
 import { projectFormMaker, todoForm, popupProjectDiv, contentDiv, } from './project'
 import { inboxCreation, taskDisplayInbox } from './inbox';
-import { taskDisplayTasks, projectTaskDisplay } from './thisWeek';
+import { taskDisplayTasks, projectTaskDisplay, trackingWeek, weekNumber } from './thisWeek';
 import { taskDisplayDay, projectTaskDay } from './today';
 
 const btnInbox = document.querySelector('#inbox')
@@ -10,6 +10,7 @@ const addButton = document.querySelector('#addButton');
 const mainDiv = document.querySelector('.main');
 const dayButton = document.querySelector('#today');
 const h2 = document.querySelector('#displayTitle');
+const h2Project = document.querySelector('#projectTitle')
 
 
 todoForm.addEventListener('click', (e) => {
@@ -32,6 +33,7 @@ function addInboxTask() {
 
     inboxCreation();
     btnInbox.addEventListener('click', (e) => {
+        // trackingWeek();
         addButton.style.display = 'block';
         contentDiv.innerHTML = '';
         taskDisplayInbox();
@@ -45,6 +47,7 @@ function addInboxTask() {
 
 function thisWeekTasks() {
     thisWeek.addEventListener('click', () => {
+        // trackingWeek();
         btnInbox.classList.remove('active');
         thisWeek.classList.add('active');
         dayButton.classList.remove('active');
@@ -58,6 +61,7 @@ function thisWeekTasks() {
 }
 function thisDayTasks() {
     dayButton.addEventListener('click', () => {
+        // trackingWeek();
         btnInbox.classList.remove('active');
         thisWeek.classList.remove('active');
         dayButton.classList.add('active');
@@ -68,6 +72,12 @@ function thisDayTasks() {
         projectTaskDay();
     });
 }
+function projectsContainer() {
+    h2Project.addEventListener('click', () => {
+        // trackingWeek();
+        addButton.style.display = 'block';
+    });
+}
 
 
-export { addProject, addInboxTask, thisWeekTasks, thisDayTasks }
+export { addProject, addInboxTask, thisWeekTasks, thisDayTasks, projectsContainer }

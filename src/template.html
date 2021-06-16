@@ -20,8 +20,8 @@
                 Today</button>
             <button class="sidebarbutton" id="thisWeek"> <i class="far fa-calendar-alt"></i>
 
-                This Week</button>
-            <h2>Projects</h2>
+                This Week <span id="tracking">0</span></button>
+            <h2 id="projectTitle">Projects</h2>
             <div id="projectTitles">
 
                 <!-- <h3 maxle>Hello <span>X</span></h3>
@@ -86,7 +86,7 @@
         <div class="popdiv">
             <form action="" id='todoform' class="">
                 <label for="titleInput">Title</label>
-                <input type="text" name="" id="titleInput" maxlength="13" placeholder="Titel">
+                <input type="text" name="" id="titleInput" maxlength="13" placeholder="Titel" required>
 
                 <label for="priority">Priority</label>
                 <select name="priority" id="priority">

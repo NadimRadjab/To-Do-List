@@ -275,15 +275,17 @@ function taskDisplayDiv(i) {
         todoDiv.append(h4);
         let spanP = document.createElement('span');
         todoDiv.append(spanP);
-        let p = document.createElement('p');
-        p.classList.add('cardSpan');
-        todoDiv.append(p);
-        let spanDate = document.createElement('input');
-        spanDate.setAttribute('type', 'date');
-        spanDate.className = projectArr[i].title.replace(/\s/g, '$');
-        todoDiv.append(spanDate);
-        // mouseTest(spanDate)
-        edit(spanDate)
+        let pText = document.createElement('textarea');
+        pText.classList.add('cardTextBox');
+        pText.classList.add(projectArr[i].title.replace(/\s/g, '$'));
+        todoDiv.append(pText);
+        editText(pText);
+        let inputDate = document.createElement('input');
+        inputDate.setAttribute('type', 'date');
+        inputDate.className = projectArr[i].title.replace(/\s/g, '$');
+        todoDiv.append(inputDate);
+
+        edit(inputDate);
 
 
         let deleteButton = document.createElement('button');
@@ -310,10 +312,10 @@ function taskDisplayDiv(i) {
                     spanP.textContent = projectArr[i].priority;
                     break;
                 case 2:
-                    p.textContent = projectArr[i].description;
+                    pText.textContent = projectArr[i].description;
                     break;
                 case 3:
-                    spanDate.value = projectArr[i].date;
+                    inputDate.value = projectArr[i].date;
                     break;
             }
         }
@@ -380,7 +382,7 @@ function removeTask(button, arr, i) {
 
 
 
-
+// Function Edits the timeInput
 function edit(input) {
     let projectArr = project.allProjects
     input.addEventListener('mouseleave', (e) => {
@@ -395,13 +397,31 @@ function edit(input) {
                 if (e.target.classList.contains(title)) {
                     todoArr[j].date = input.value;
 
-                }
+                };
 
+            };
+
+        };
+    });
+}
+
+// Function edits the  Textbox
+function editText(textDesc) {
+    let projectArr = project.allProjects
+    textDesc.addEventListener('mouseleave', (e) => {
+        for (let i = 0; i < projectArr.length; i++) {
+            let todoArr = projectArr[i].todo
+            for (let j = 0; j < todoArr.length; j++) {
+                let title = todoArr[j].title.replace(/\s/g, '$');
+                if (e.target.classList.contains(title)) {
+                    todoArr[j].description = textDesc.value;
+                }
             }
 
         };
     });
 }
+
 
 
 
