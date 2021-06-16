@@ -358,6 +358,7 @@ select:focus{
     margin: 0;
     padding: 0;
     cursor: pointer;
+    
   }
 
 
@@ -401,9 +402,10 @@ select:focus{
 /* TodoDiv */
 .card{
     /* grid-template-rows: repeat(1, 1fr 1fr 1fr); */
-    background-color: #e55934;
+    background-color: #f29559;
     grid-template-columns: repeat(5, 1fr);
     display: grid;
+    color: #e55934;
     width:400px ;
     justify-self: center;
     grid-auto-columns: minmax(100px,auto);
@@ -426,15 +428,22 @@ select:focus{
 
 
 /* Card Items */
-.cardSpan{
+.cardTextBox{
     grid-column: 6/1;
     margin: 15px;
     font-size: 15px;
     display:flex;
     flex-direction: column;
     width: 300px;
-    
+    background-color: #fca17d;
+    outline: none;
+    margin: 10px;
+    font-family: 'Courgette', cursive;
+    border-radius: 5%;
+    border: none;
     overflow-y: auto;
+    color:#e55934 ;
+    font-size: 20px;
 }
 
 .card>button{
@@ -475,14 +484,28 @@ span:nth-of-type(2){
     grid-row: 1 ;
     grid-column: 4/6;
     font-size: 20px;
-}
+} 
+
 .card>input{
     justify-self: center;
     align-self: center;
     grid-row: 1 ;
     grid-column: 4/6;
-    font-size: 20px;
+    width: 145px;
+    outline: none;
+    border: none;
+    color: #e55934;
+    border-bottom: 3px solid #e55934;
+    background-color:#f29559 ;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Courgette', cursive;
+   
 }
+.card>input:hover{
+cursor: inherit;
+}
+
 
 
 /* All Buttons */

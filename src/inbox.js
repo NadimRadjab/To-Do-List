@@ -47,6 +47,8 @@ function taskFormAction() {
 
 
 }
+
+
 function taskFormReset(title, select, date, text) {
     title.value = '';
     select.value = '';
@@ -56,6 +58,8 @@ function taskFormReset(title, select, date, text) {
 
 
 
+
+// Function That displays cards when inbox is pressed
 function taskDisplayInbox() {
 
     let taskArr = task.allTasks;
@@ -63,6 +67,7 @@ function taskDisplayInbox() {
 
     for (let i = 0; i < taskArr.length; i++) {
         console.log(taskArr[i])
+        let title = taskArr[i].title;
         const todoDiv = document.createElement('div');
         todoDiv.classList.add('card');
         contentDiv.append(todoDiv);
@@ -70,17 +75,19 @@ function taskDisplayInbox() {
         todoDiv.append(h4);
         let spanP = document.createElement('span');
         todoDiv.append(spanP);
-        let p = document.createElement('p');
-        p.classList.add('cardSpan')
-        todoDiv.append(p);
-        let spanDate = document.createElement('input');
-        spanDate.setAttribute('type', 'date');
-        let title = taskArr[i].title;
+        let pText = document.createElement('textarea');
+        pText.classList.add('cardTextBox');
+        pText.classList.add(title.replace(/\s/g, '$'));
+        todoDiv.append(pText);
+        editText(pText);
+        let inputDate = document.createElement('input');
+        inputDate.setAttribute('type', 'date');
 
-        spanDate.className = title.replace(/\s/g, '$');
-        mouseTest(spanDate)
-        edit(spanDate)
-        todoDiv.append(spanDate);
+
+        inputDate.className = title.replace(/\s/g, '$');
+        mouseTest(inputDate);
+        edit(inputDate);
+        todoDiv.append(inputDate);
         let deleteButton = document.createElement('button');
         todoDiv.append(deleteButton);
         deleteButton.textContent = 'X';
@@ -88,7 +95,7 @@ function taskDisplayInbox() {
         deleteButton.className = title.replace(/\s/g, '$');
 
 
-        removeTask(deleteButton)
+        removeTask(deleteButton);
         mouseOver(deleteButton);
 
         for (let k = 0; k < 4; k++) {
@@ -102,10 +109,10 @@ function taskDisplayInbox() {
                     spanP.textContent = taskArr[i].priority;
                     break;
                 case 2:
-                    p.textContent = taskArr[i].description;
+                    pText.textContent = taskArr[i].description;
                     break;
                 case 3:
-                    spanDate.value = taskArr[i].date;
+                    inputDate.value = taskArr[i].date;
                     break;
             }
         }
@@ -124,6 +131,9 @@ function mouseTest(button) {
     });
 
 }
+
+
+// Function Edits the timeInput
 function edit(input) {
     let taskArr = task.allTasks;
     input.addEventListener('mouseleave', (e) => {
@@ -137,6 +147,26 @@ function edit(input) {
         };
     });
 }
+
+
+// Function edits the  Textbox
+function editText(textDesc) {
+    let taskArr = task.allTasks;
+    textDesc.addEventListener('mouseleave', (e) => {
+        for (let i = 0; i < taskArr.length; i++) {
+            let title = taskArr[i].title.replace(/\s/g, '$');
+            console.log(taskArr[i])
+            if (e.target.classList.contains(title)) {
+                taskArr[i].description = textDesc.value;
+            }
+
+        };
+    });
+}
+
+
+
+// Function Removes the Task
 function removeTask(span) {
     let taskArr = task.allTasks;
     span.addEventListener('click', (e) => {

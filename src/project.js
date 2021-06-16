@@ -131,7 +131,7 @@ function formAction(text) {
 
     h3.addEventListener('click', (e) => {
         e.stopPropagation();
-        spanDelete.className = e.target.textContent;
+        spanDelete.className = e.target.textContent.replace(/\s/g, '$');;
 
         e.currentTarget.classList.toggle('active');
 
@@ -151,7 +151,7 @@ function formAction(text) {
 
                 h2Title.textContent = title
                 if (e.target.classList.contains('active')) {
-                    todoForm.className = title
+                    todoForm.className = title.replace(/\s/g, '$')
                     taskDisplayDiv(i,)
 
 
@@ -225,7 +225,7 @@ function taskFormAction() {
 
 
     for (let i = 0; i < projectArr.length; i++) {
-        let title = projectArr[i].title
+        let title = projectArr[i].title.replace(/\s/g, '$')
         if (todoForm.classList.contains(title)) {
             project.allProjects[i].todo.push(new Todo(titleInput.value, selectInput.value, textInput.value, dateInput.value));
 
@@ -272,18 +272,24 @@ function taskDisplayDiv(i) {
         todoDiv.classList.add('card');
         contentDiv.append(todoDiv);
         let h4 = document.createElement('h4');
-        todoDiv.append(h4)
+        todoDiv.append(h4);
         let spanP = document.createElement('span');
-        todoDiv.append(spanP)
+        todoDiv.append(spanP);
         let p = document.createElement('p');
-        p.classList.add('cardSpan')
-        todoDiv.append(p)
-        let spanDate = document.createElement('span');
-        todoDiv.append(spanDate)
-        let deleteButton = document.createElement('button')
-        todoDiv.append(deleteButton)
+        p.classList.add('cardSpan');
+        todoDiv.append(p);
+        let spanDate = document.createElement('input');
+        spanDate.setAttribute('type', 'date');
+        spanDate.className = projectArr[i].title.replace(/\s/g, '$');
+        todoDiv.append(spanDate);
+        // mouseTest(spanDate)
+        edit(spanDate)
+
+
+        let deleteButton = document.createElement('button');
+        todoDiv.append(deleteButton);
         deleteButton.textContent = 'X';
-        deleteButton.className = projectTitle;
+        deleteButton.className = projectTitle.replace(/\s/g, '$');
 
 
 
@@ -301,13 +307,13 @@ function taskDisplayDiv(i) {
                     h4.textContent = projectArr[i].title;
                     break;
                 case 1:
-                    spanP.innerHTML = projectArr[i].priority;
+                    spanP.textContent = projectArr[i].priority;
                     break;
                 case 2:
                     p.textContent = projectArr[i].description;
                     break;
                 case 3:
-                    spanDate.textContent = projectArr[i].date;
+                    spanDate.value = projectArr[i].date;
                     break;
             }
         }
@@ -320,7 +326,7 @@ function taskDisplayDiv(i) {
 
 
 // Helper function toggles delete
-function mouseOver(button,) {
+function mouseOver(button) {
     button.addEventListener('mouseover', (e) => {
         button.classList.toggle('delete');
 
@@ -339,7 +345,7 @@ function removeProject(span, h2) {
     span.addEventListener('click', (e) => {
         h2.textContent = '';
         for (let i = 0; i < projectArr.length; i++) {
-            let title = projectArr[i].title;
+            let title = projectArr[i].title.replace(/\s/g, '$');
             if (e.target.classList.contains(title + "X")) {
 
                 e.target.parentNode.remove();
@@ -370,6 +376,34 @@ function removeTask(button, arr, i) {
         }
     })
 };
+
+
+
+
+
+function edit(input) {
+    let projectArr = project.allProjects
+    input.addEventListener('mouseleave', (e) => {
+        console.log('test')
+        for (let i = 0; i < projectArr.length; i++) {
+            let todoArr = projectArr[i].todo
+            for (let j = 0; j < todoArr.length; j++) {
+
+                let title = todoArr[j].title.replace(/\s/g, '$');
+                console.log(todoArr[j])
+
+                if (e.target.classList.contains(title)) {
+                    todoArr[j].date = input.value;
+
+                }
+
+            }
+
+        };
+    });
+}
+
+
 
 
 // Helper Function Resets the  contentDiv
