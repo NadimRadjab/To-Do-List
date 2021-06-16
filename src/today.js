@@ -1,7 +1,7 @@
 import { task } from "./dailyTaskClass";
-import { contentDiv, todoForm, popupDiv, mouseOver } from "./project"
-import { Todo, project } from './projectClass';
-import { isThisWeek, parseISO } from './vendor';
+import { contentDiv, } from "./project"
+import { project } from './projectClass';
+import { isToday, parseISO } from './vendor';
 
 
 
@@ -9,16 +9,14 @@ import { isThisWeek, parseISO } from './vendor';
 
 
 
-
-
-function taskDisplayTasks() {
+function taskDisplayDay() {
 
     let taskArr = task.allTasks;
 
 
     for (let i = 0; i < taskArr.length; i++) {
         let time = parseISO(taskArr[i].date)
-        if (isThisWeek(time) === true) {
+        if (isToday(time) === true) {
 
             const todoDiv = document.createElement('div');
             todoDiv.classList.add('card');
@@ -63,7 +61,7 @@ function taskDisplayTasks() {
 
 
 
-function projectTaskDisplay() {
+function projectTaskDay() {
 
 
     let projectArr = project.allProjects;
@@ -73,7 +71,7 @@ function projectTaskDisplay() {
 
         for (let i = 0; i < todoArr.length; i++) {
             let time = parseISO(todoArr[i].date)
-            if (isThisWeek(time) === true) {
+            if (isToday(time) === true) {
                 const todoDiv = document.createElement('div');
                 todoDiv.classList.add('card');
                 contentDiv.append(todoDiv);
@@ -86,8 +84,6 @@ function projectTaskDisplay() {
                 todoDiv.append(p);
                 let spanDate = document.createElement('span');
                 todoDiv.append(spanDate);
-
-
 
 
                 for (let k = 0; k < 4; k++) {
@@ -116,8 +112,5 @@ function projectTaskDisplay() {
 
 }
 
+export { taskDisplayDay, projectTaskDay }
 
-
-
-
-export { taskDisplayTasks, projectTaskDisplay }

@@ -1,5 +1,4 @@
-import { domFun } from './domfunc'
-import { Todo, project } from './projectClass'
+import { Todo, project } from './projectClass';
 
 
 // Dom Selections

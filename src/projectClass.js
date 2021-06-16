@@ -1,6 +1,6 @@
 class Project {
     constructor(title) {
-        this.title = title
+        this.title = title;
         this.todo = [];
 
     }
@@ -34,10 +34,10 @@ export let project = new Projects();
 
 export class Todo {
     constructor(title, priority, description, date) {
-        this.title = title
-        this.priority = priority
-        this.description = description
-        this.date = date
+        this.title = title;
+        this.priority = priority;
+        this.description = description;
+        this.date = date;
 
     }
 
