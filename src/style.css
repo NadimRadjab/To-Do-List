@@ -6,7 +6,7 @@
 
 body{
     margin: 0;
-    background-color: #fca17d;
+    background-color: #6c757d;
     font-family: 'Courgette', cursive;
 }
 /* 
@@ -15,9 +15,9 @@ Title */
 #title{
     max-width: 2000px;
     height: 100px;
-    border-bottom: 2px solid black;
+    border-bottom: 5px solid black;
     
-    background-color: #e55934;
+    background-color: #6c757d;
     overflow: hidden;
 
 }
@@ -31,7 +31,7 @@ h1{
 
 
 .container{
-    background-color: #fca17d;
+    background-color: #6c757d;
     display: grid;
     grid-template-columns: repeat(2,1fr);
     grid-auto-columns: minmax(100px,auto);
@@ -48,7 +48,7 @@ h1{
     flex-direction: column;
     width: 350px;
     height: 750px;
-    border-right: 1px solid black;
+    border-right: 3px solid black;
     align-items: center;
     
     
@@ -60,9 +60,10 @@ h1{
     cursor: pointer;
     border:  none;
     font-size: 18px;
-    background-color: #fca17d;
-    border-radius: 2%;
+    background-color: #fdf0d5;
+    border-radius: 6%;
     font-family: 'Courgette', cursive;
+    box-shadow: 3px 5px;
 }
 
 
@@ -82,7 +83,7 @@ form{
     display: flex;
     flex-direction: column;
     
-    width: 1650px;
+    width: 1450px;
     height: 750px;
     overflow-y:auto;
   
@@ -120,7 +121,7 @@ form{
 
 .projectForm{
     display: grid;
-    background-color:  #f29559;	
+    background-color:  #ffd8be;	
     grid-template-columns: repeat(2,1fr);
     width: 400px;
     height: 200px;
@@ -135,9 +136,9 @@ form{
     height: 50px;
     border: none;
     align-self:center;
-    border-bottom: #e55934 3px solid ;
+    border-bottom: black 3px solid ;
     grid-column: 1/3;
-    background-color:  #f29559;	
+    background-color:  #ffd8be;	
     outline: none;
     font-size: 18px;
     font-family: 'Courgette', cursive;
@@ -145,7 +146,7 @@ form{
 }
 .projectForm>input:nth-of-type(2){
     grid-column: 1/2;
-    background-color:  #f29559;	
+    background-color:  #fdf0d5;	
     align-self: center;
     justify-self: center;
     width: 100px;
@@ -154,11 +155,12 @@ form{
     border: none;
     font-size: 18px;
     font-family: 'Courgette', cursive;
+    box-shadow: 2px 3px;
 
 
 }
 .projectForm>button{
-    background-color:  #f29559;	
+    background-color:  #fdf0d5;	
     align-self: center;
     justify-self: center;
     width: 100px;
@@ -167,32 +169,23 @@ form{
     border: none;
     font-size: 18px;
     font-family: 'Courgette', cursive;
+    box-shadow: 2px 3px;
 
 }
 .projectForm>input:hover{
     cursor: pointer;
-    transition-duration: 500ms;
-    transform: scale(1.1);
+    
 }
 
 
-/* Project SideBar Div */
-/* .project{
-    display: grid ;
-    grid-auto-columns: minmax(100px,auto);
-    grid-template-columns: repeat(2,1fr);
-    justify-items: center;
-    grid-gap: 2em;
-    width: 500px;
-    border: 2px solid black;
-} */
+
 #projectTitles{
       display: grid; 
       grid-template-columns: repeat(1,1fr);
      
 		height:150px;
         width: 95%;
-		background-color:  #f29559;		
+		background-color:  #fdf0d5;		
         overflow-y:auto;
         border-radius: 2%;
 		float:left;
@@ -211,17 +204,20 @@ border-radius: 2%;
 font-size: 25px;
 align-self: center;
 justify-self: center;
+border-bottom: 3px solid black;
 }
 h3:hover{
-    transition-duration: 500ms;
-    background-color:#fca17d ;
+    transition-duration: 400ms;
+    background-color:#ffd8be ;
     transform: scale(1.1);
     cursor: pointer;
+    box-shadow: 3px 3px ;
 
 }
 .active{
     transform: scale(1.1);
-    background-color:#fca17d ;
+    background-color:#ffd8be ;
+    box-shadow: 3px 3px ;
 }
 h3>span:hover{
     color: red;
@@ -271,7 +267,7 @@ h4{
     grid-auto-rows: minmax(100px,auto);
  grid-gap: 1.5em;
  margin: 5px;
- background-color:  #f29559;	
+ background-color:  #ffd8be;	
    border-radius: 3%;
 }
 
@@ -287,19 +283,20 @@ Todoform */
     grid-template-columns: repeat(2, 1fr );
 }
 #todoAdd{
-    background-color: #e55934; /* Green */
+    background-color: #fdf0d5; /* Green */
     width: 70px;
     height: 70px;
   border: none;
-  color: white;
+  color: black;
   font-size: 50px;
   margin: 10px;
   justify-self: center;
     border-radius: 50%; 
+    box-shadow: 2px 3px;
     
 }
 #close{
- background-color:  #f29559;	
+ background-color:  #fdf0d5;	
 align-self: end;
 justify-self: end;
 width: 100px;
@@ -320,9 +317,9 @@ font-family: 'Courgette', cursive;
 #todoform>input{
   height: 32px;
   cursor: pointer;
-  background-color:  #f29559;
+  background-color:  #ffd8be;
   border: none;
-  border-bottom: #e55934 3px solid ;
+  border-bottom: black 2px solid ;
 outline: none;
    
 }
@@ -338,8 +335,8 @@ select{
 height: 32px;
 outline: none;
 border: none;
-border-bottom: #e55934 3px solid ;
-background-color:  #f29559;
+border-bottom: black 2px solid ;
+background-color:  #ffd8be;
 font-size: 17px;
 }
 select:focus{
@@ -365,7 +362,7 @@ select:focus{
 #description{
     margin: 10px;
     font-family: 'Courgette', cursive;
-   
+background-color: #fdf0d5;
     border-radius: 5%;
     border: none;
     
@@ -389,30 +386,32 @@ select:focus{
 }
 
 #addButton{
-    background-color: #e55934; /* Green */
+    background-color: #fdf0d5; 
     width: 80px;
     height: 80px;
   border: none;
-  color: white;
+  color: black;
   font-size: 60px;
   margin: 10px;
    border-radius: 50%;
+   box-shadow: 2px 3px;
 }
 
 /* TodoDiv */
 .card{
     /* grid-template-rows: repeat(1, 1fr 1fr 1fr); */
-    background-color: #f29559;
+    background-color: #ffd8be;
     grid-template-columns: repeat(5, 1fr);
     display: grid;
-    color: #e55934;
+    color: black;
     width:400px ;
     justify-self: center;
     grid-auto-columns: minmax(100px,auto);
     grid-auto-rows: minmax(100px,auto);
-    border: 1px solid gray;
+    border: 1px solid black;
     height: 250px;
     border-radius: 2%;
+    box-shadow: 3px 4px ;
     
     
 }
@@ -435,20 +434,20 @@ select:focus{
     display:flex;
     flex-direction: column;
     width: 300px;
-    background-color: #fca17d;
+    background-color: #fdf0d5;
     outline: none;
     margin: 10px;
     font-family: 'Courgette', cursive;
     border-radius: 5%;
     border: none;
     overflow-y: auto;
-    color:#e55934 ;
+    color:black ;
     font-size: 20px;
 }
 
 .card>button{
     font-weight: bold;
-    background-color: #e55934;
+    background-color: #fdf0d5;
     margin: 7px;
     line-height:23px;
     width:23px;
@@ -494,9 +493,9 @@ span:nth-of-type(2){
     width: 145px;
     outline: none;
     border: none;
-    color: #e55934;
-    border-bottom: 3px solid #e55934;
-    background-color:#f29559 ;
+    color: black;
+    border-bottom: 3px solid black;
+    background-color:#ffd8be ;
     font-weight: bold;
     font-size: 16px;
     font-family: 'Courgette', cursive;

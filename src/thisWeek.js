@@ -48,7 +48,7 @@ function addWeek() {
             weekArr.push(taskArr[i]);
             weekArr = _.uniq(weekArr);
             display();
-            console.log(weekArr);
+
 
         }
     }
@@ -64,7 +64,7 @@ function removeWeek(button) {
             if (e.target.classList.contains(title)) {
                 weekArr.splice(i, 1);
 
-                console.log(weekArr);
+
 
                 display();
 
@@ -86,7 +86,7 @@ function editWeek(textDesc) {
             if (e.target.classList.contains(title)) {
                 if (isThisWeek(timeTask) === false) {
                     weekArr.splice(i, 1);
-                    console.log(weekArr);
+
                     display();
                 }
 
@@ -115,7 +115,7 @@ function addWeekProject() {
                 weekPro.push(todoArr[k]);
                 weekPro = _.uniq(weekPro);
                 display();
-                console.log(weekPro);
+
             }
         }
     }
@@ -136,10 +136,9 @@ function removeWeekTaskProject(button) {
 
             if (e.target.classList.contains(title)) {
                 if (isThisWeek(timeProject) === true) {
-                    console.log(timeProject)
-                    console.log('hi')
+
                     weekPro.splice(i, 1);
-                    console.log(weekPro)
+
 
                 }
                 display();
@@ -151,14 +150,9 @@ function removeWeekTaskProject(button) {
 function removeWeekProject(span) {
 
     span.addEventListener('click', (e) => {
-
         weekPro.splice(0);
-        console.log(weekPro);
         addWeekProject();
         display();
-
-        console.log(weekPro);
-
 
 
     });
@@ -175,7 +169,6 @@ function editWeekProject(textDesc) {
             if (e.target.classList.contains(title)) {
                 if (isThisWeek(timeTask) === false) {
                     weekPro.splice(i, 1);
-                    console.log(weekPro);
                     display();
                 }
 

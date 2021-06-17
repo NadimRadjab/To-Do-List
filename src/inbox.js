@@ -1,6 +1,8 @@
+import { fromPairs } from "lodash";
 import { task } from "./dailyTaskClass";
 import { contentDiv, todoForm, popupDiv, mouseOver } from "./project"
 import { addWeek, removeWeek, editWeek } from './thisWeek';
+import { addDay, displayDay, removeDay, editDay } from './today'
 
 
 
@@ -18,7 +20,7 @@ function inboxCreation() {
 
         taskFormAction();
         addWeek();
-
+        addDay();
         e.stopPropagation();
         e.preventDefault();
 
@@ -93,6 +95,7 @@ function taskDisplayInbox() {
         mouseTest(inputDate);
         edit(inputDate);
         editWeek(inputDate);
+        editDay(inputDate);
         todoDiv.append(inputDate);
         let deleteButton = document.createElement('button');
         todoDiv.append(deleteButton);
@@ -100,6 +103,8 @@ function taskDisplayInbox() {
 
         deleteButton.className = title.replace(/\s/g, '$');
         removeWeek(deleteButton);
+
+        removeDay(deleteButton);
 
         removeTask(deleteButton);
         mouseOver(deleteButton);

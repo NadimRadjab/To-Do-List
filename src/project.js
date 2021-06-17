@@ -1,5 +1,7 @@
+import { fromPairs } from 'lodash';
 import { Todo, project } from './projectClass';
 import { addWeekProject, removeWeekProject, display, removeWeekTaskProject, editWeekProject } from './thisWeek';
+import { addDayProject, removeDayProject, removeDayTaskProject, editDayProject, displayDay } from './today'
 
 
 // Dom Selections
@@ -120,6 +122,8 @@ function formAction(text) {
     h3.append(spanDelete);
     removeProject(spanDelete, h2Title);
     removeWeekProject(spanDelete);
+    removeDayProject(spanDelete);
+    addDayProject();
 
 
 
@@ -203,7 +207,9 @@ todoForm.addEventListener('submit', (e) => {
     e.stopPropagation();
     taskFormAction();
     addWeekProject();
+    addDayProject();
     display();
+    displayDay();
     closePopups();
 
 
@@ -282,6 +288,7 @@ function taskDisplayDiv(i) {
         pText.classList.add(projectArr[i].title.replace(/\s/g, '$'));
         todoDiv.append(pText);
         editText(pText);
+        editDayProject(pText);
         editWeekProject(pText);
         let inputDate = document.createElement('input');
         inputDate.setAttribute('type', 'date');
@@ -300,6 +307,7 @@ function taskDisplayDiv(i) {
 
 
         removeTask(deleteButton, projectArr, i);
+        removeDayTaskProject(deleteButton);
         removeWeekTaskProject(deleteButton);
         buttonTaskAdd(deleteButton);
 
@@ -356,7 +364,6 @@ function removeProject(span, h2) {
             if (e.target.classList.contains(title + "X")) {
 
                 e.target.parentNode.remove();
-                console.log(projectArr);
                 projectArr.splice(i, 1);
             }
 
