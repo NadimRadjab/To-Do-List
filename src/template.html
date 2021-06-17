@@ -14,44 +14,36 @@
     </div>
     <div class="container">
         <div class="sideBar">
-            <button class="sidebarbutton" id="inbox"> <i class="fas fa-inbox"></i> Inbox</button>
+            <button class="sidebarbutton active" id="inbox"> <i class="fas fa-inbox "></i> Inbox</button>
             <button class="sidebarbutton" id="today"> <i class="fas fa-calendar-day"></i>
-                Today <span id="trackingDay">0 </span> <span id="trackingDayP">0</span></span></button>
+                Today <div><span id="trackingDay">0</span></div>
+                <div> <span id="trackingDayP">0</span></div>
+            </button>
             <button class="sidebarbutton" id="thisWeek"> <i class="far fa-calendar-alt"></i>
 
-                This Week <span id="tracking">0</span> <span id="trackingP">0</span></button>
+                This Week<div><span id="tracking">0</span> </div>
+                <div><span id="trackingP">0</span></div>
+            </button>
             <h2 id="projectTitle">Projects</h2>
             <div id="projectTitles">
 
-                <!-- <h3 maxle>Hello <span>X</span></h3>
-                <h3>Hello <span>X</span></h3>
-                <h3>Hello <span>X</span></h3>
-                <h3>Hello <span>X</span></h3> -->
 
             </div>
-            <button class="sidebarbutton" id="projectBtn"> <i class="fas fa-plus"></i>
-                Add a Project</button>
+            <button class="sidebarbutton" disabled id="projectBtn"> <i class="fas fa-plus"></i> Add a Project</button>
         </div>
 
 
         <div class="main">
             <div class="upperContent">
                 <button id='addButton' data-number="0">+</button>
-                <h2 id="displayTitle">Hello</h2>
+                <h2 id="displayTitle">Inbox</h2>
 
             </div>
 
 
 
             <div class="content">
-                <div class="card">
-                    <button>X</button>
-                    <h4>Hello</h4>
-                    <span>Low</span>
-                    <textarea class="cardTextBox" name="description" id="description" cols="40" rows="10"
-                        placeholder="Description"></textarea>
-                    <input type="date">
-                </div>
+
 
 
 
@@ -67,12 +59,6 @@
 
 
     <div class="popupProject">
-        <!-- <form action="" id="projectForm">
-            <input type="text" name="" id="" placeholder="Title">
-            <input type="submit">
-            <button type="button">Cancel</button>
-
-        </form> -->
 
 
     </div>
@@ -83,15 +69,15 @@
 
     <div class="popupTask">
         <div class="popdiv">
-            <form action="" id='todoform' class="">
+            <form action="" id='todoform' class="Inbox">
                 <label for="titleInput">Title</label>
                 <input type="text" name="" id="titleInput" maxlength="13" placeholder="Titel" required>
 
                 <label for="priority">Priority</label>
                 <select name="priority" id="priority">
-                    <option value="low">low</option>
-                    <option value="medium">medium</option>
-                    <option value="heigh">heigh</option>
+                    <option value="low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
                 </select>
 
 

@@ -24,7 +24,8 @@ Title */
 h1{
     position: relative;
     left: 150px;
-    font-size: 40px;
+    font-size: 45px;
+    color: #fdf0d5;
 }
 
 
@@ -55,7 +56,7 @@ h1{
 }
 .sideBar>button{
     margin: 10px;
-    width: 200px;
+    width: 250px;
     height: 50px;
     cursor: pointer;
     border:  none;
@@ -64,6 +65,22 @@ h1{
     border-radius: 6%;
     font-family: 'Courgette', cursive;
     box-shadow: 3px 5px;
+}
+
+.sideBar>button>div{
+    float: right;
+    width:25px ;
+    height:25px ;
+    background-color: rgb(192, 190, 190);
+    border-radius: 50%;
+    font-size: 18px;
+    margin: 3px;
+    font-family: monospace;
+}
+.scaleSpan{
+    /* transition-duration: 500ms; */
+    transition: all 0.2s ease-in;
+    transform: scale(1.5) ;
 }
 
 
@@ -182,8 +199,7 @@ form{
 #projectTitles{
       display: grid; 
       grid-template-columns: repeat(1,1fr);
-     
-		height:150px;
+		height: 0px;
         width: 95%;
 		background-color:  #fdf0d5;		
         overflow-y:auto;
@@ -192,8 +208,33 @@ form{
 		
        	
 }
+
+#projectTitles:hover{
+    height:150px;
+    transition-duration: 800ms;
+    transition-property: height;
+    transition-timing-function: ease-out;
+   
+}
+.display{
+    height:150px;
+    transition-duration: 450ms;
+    transition-property: height;
+    transition-timing-function: ease-in;
+}
 h2{
     font-size: 30px;
+    color: #fdf0d5;
+}
+h2:hover{
+
+    transition-duration: 400ms;
+    transform: scale(1.2);
+    cursor: pointer;
+    box-shadow: 2px 2px black;
+}
+h2:active{
+    box-shadow: 4px 5px black;
 }
 
 h3{

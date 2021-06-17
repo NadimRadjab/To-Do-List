@@ -18,19 +18,29 @@ let dayPro = [];
 
 function displayDay() {
     if (dayArr.length > 0) {
-        trackerDay.style.color = 'red';
+        trackerDay.style.color = '#ba181b';
         trackerDay.textContent = dayArr.length
+        trackerDay.parentElement.classList.add('scaleSpan')
+        setTimeout(() => {
+            trackerDay.parentElement.classList.remove('scaleSpan')
+        }, 600)
     } else if (dayArr.length <= 0) {
         trackerDay.textContent = dayArr.length
-        trackerDay.style.color = 'blue';
+        trackerDay.parentElement.classList.remove('scaleSpan')
+        trackerDay.style.color = 'black';
     }
 
     if (dayPro.length > 0) {
-        trackerDayP.style.color = 'red'
+        trackerDayP.style.color = '#ba181b'
         trackerDayP.textContent = dayPro.length
+        trackerDayP.parentElement.classList.add('scaleSpan')
+        setTimeout(() => {
+            trackerDayP.parentElement.classList.remove('scaleSpan')
+        }, 600)
     } else if (dayPro.length <= 0) {
         trackerDayP.textContent = dayPro.length
-        trackerDayP.style.color = 'blue';
+        trackerDayP.parentElement.classList.remove('scaleSpan')
+        trackerDayP.style.color = 'black';
     }
 
 }

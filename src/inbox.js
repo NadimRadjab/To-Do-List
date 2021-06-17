@@ -6,7 +6,12 @@ import { addDay, displayDay, removeDay, editDay } from './today'
 
 
 
-
+function introInbox() {
+    task.newTask('Tutorial', "High", "This is the Inbox. Here you can create tasks delete tasks and edit tasks.", 'Today Bro');
+    task.newTask('Tutorial Projects', "High", "Click on  Projects to open the Projects Window and create your first Project and tasks to it.", '18-06-2021');
+    task.newTask('Shoping', "Medium", "milk, egss, bread", '18/06/2021');
+    taskDisplayInbox();
+}
 
 let buttonAdd = document.querySelector('#addButton');
 buttonAdd.addEventListener('click', (e) => {
@@ -220,4 +225,4 @@ function removeTask(span) {
 
 
 
-export { inboxCreation, taskDisplayInbox }
+export { inboxCreation, taskDisplayInbox, introInbox }

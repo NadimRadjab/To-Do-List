@@ -4,6 +4,12 @@ import { addWeekProject, removeWeekProject, display, removeWeekTaskProject, edit
 import { addDayProject, removeDayProject, removeDayTaskProject, editDayProject, displayDay } from './today'
 
 
+
+
+
+
+
+
 // Dom Selections
 
 const sideBar = document.querySelector('.sideBar');
@@ -78,6 +84,7 @@ function projectFormMaker() {
     text.setAttribute('name', 'Title');
     text.setAttribute('placeholder', 'Title');
     text.setAttribute('maxlength', '13')
+    text.setAttribute('required', 'required');
 
 
     const submit = document.createElement('input');
@@ -119,6 +126,7 @@ function formAction(text) {
     projectDiv.append(h3);
     let spanDelete = document.createElement('span');
     spanDelete.textContent = 'X';
+    spanDelete.style.display = 'none'
     h3.append(spanDelete);
     removeProject(spanDelete, h2Title);
     removeWeekProject(spanDelete);
@@ -138,7 +146,7 @@ function formAction(text) {
     h3.addEventListener('click', (e) => {
         e.stopPropagation();
         spanDelete.className = e.target.textContent.replace(/\s/g, '$');;
-
+        spanDelete.style.display = 'block'
         e.currentTarget.classList.toggle('active');
 
         // Target the  h3 siblings
@@ -463,7 +471,7 @@ function buttonTaskAdd(button) {
 
 
 
-export { projectFormMaker, mouseOver, todoForm, popupProjectDiv, contentDiv, popupDiv }
+export { projectFormMaker, mouseOver, todoForm, popupProjectDiv, contentDiv, popupDiv, }
 
 
 

@@ -11,6 +11,7 @@ const mainDiv = document.querySelector('.main');
 const dayButton = document.querySelector('#today');
 const h2 = document.querySelector('#displayTitle');
 const h2Project = document.querySelector('#projectTitle')
+const projectDiv = document.querySelector('#projectTitles')
 
 
 todoForm.addEventListener('click', (e) => {
@@ -22,7 +23,13 @@ todoForm.addEventListener('click', (e) => {
 
 function addProject() {
     btnProject.addEventListener('click', () => {
+        addButton.style.display = 'block';
         popupProjectDiv.style.display = 'flex'
+        addButton.disabled = false
+        projectDiv.style.height = '150px';
+        projectDiv.classList.add('display');
+        contentDiv.innerHTML = '';
+        h2.textContent = 'Projects'
         projectFormMaker();
 
     })
@@ -33,7 +40,8 @@ function addInboxTask() {
 
     inboxCreation();
     btnInbox.addEventListener('click', (e) => {
-        // trackingWeek();
+        projectDiv.style.height = '0px';
+        addButton.disabled = false
         addButton.style.display = 'block';
         contentDiv.innerHTML = '';
         taskDisplayInbox();
@@ -47,7 +55,7 @@ function addInboxTask() {
 
 function thisWeekTasks() {
     thisWeek.addEventListener('click', () => {
-        // trackingWeek();
+        projectDiv.style.height = '0px';
         btnInbox.classList.remove('active');
         thisWeek.classList.add('active');
         dayButton.classList.remove('active');
@@ -61,7 +69,7 @@ function thisWeekTasks() {
 }
 function thisDayTasks() {
     dayButton.addEventListener('click', () => {
-        // trackingWeek();
+        projectDiv.style.height = '0px';
         btnInbox.classList.remove('active');
         thisWeek.classList.remove('active');
         dayButton.classList.add('active');
@@ -74,8 +82,15 @@ function thisDayTasks() {
 }
 function projectsContainer() {
     h2Project.addEventListener('click', () => {
-        // trackingWeek();
         addButton.style.display = 'block';
+        addButton.disabled = true
+        contentDiv.innerHTML = '';
+        h2.textContent = 'Projects';
+        projectDiv.style.height = '150px';
+        projectDiv.classList.add('display');
+
+        btnProject.disabled = false
+
     });
 }
 

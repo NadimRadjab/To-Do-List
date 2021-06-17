@@ -18,19 +18,30 @@ let weekPro = [];
 
 function display() {
     if (weekArr.length > 0) {
-        tracker.style.color = 'red';
+        tracker.style.color = '#ba181b';
         tracker.textContent = weekArr.length
+        tracker.parentElement.classList.add('scaleSpan')
+        setTimeout(() => {
+            tracker.parentElement.classList.remove('scaleSpan')
+        }, 600)
     } else if (weekArr.length <= 0) {
         tracker.textContent = weekArr.length
-        tracker.style.color = 'blue';
+        tracker.parentElement.classList.remove('scaleSpan')
+        tracker.style.color = 'black';
     }
 
     if (weekPro.length > 0) {
-        trackerP.style.color = 'red'
+        trackerP.style.color = '#ba181b'
+        trackerP.classList.add('scaleSpan')
         trackerP.textContent = weekPro.length
+        trackerP.parentElement.classList.add('scaleSpan')
+        setTimeout(() => {
+            trackerP.parentElement.classList.remove('scaleSpan')
+        }, 600)
     } else if (weekPro.length <= 0) {
         trackerP.textContent = weekPro.length
-        trackerP.style.color = 'blue';
+        trackerP.parentElement.classList.remove('scaleSpan')
+        trackerP.style.color = 'black';
     }
 
 }
