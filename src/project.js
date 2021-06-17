@@ -1,4 +1,5 @@
 import { Todo, project } from './projectClass';
+import { addWeekProject, removeWeekProject, display, removeWeekTaskProject, editWeekProject } from './thisWeek';
 
 
 // Dom Selections
@@ -111,20 +112,21 @@ function formAction(text) {
     // Main h3 holds the project title
 
     let h3 = document.createElement('h3');
-    h3.classList.add('test')
+    h3.classList.add('test');
     h3.textContent = text;
     projectDiv.append(h3);
     let spanDelete = document.createElement('span');
-    spanDelete.textContent = 'X'
-    h3.append(spanDelete)
-    removeProject(spanDelete, h2Title)
+    spanDelete.textContent = 'X';
+    h3.append(spanDelete);
+    removeProject(spanDelete, h2Title);
+    removeWeekProject(spanDelete);
 
 
 
     document.addEventListener('click', (e) => {
         let isClickInsideElement = h3.contains(e.target);
         if (!isClickInsideElement) {
-            h3.classList.remove('active')
+            h3.classList.remove('active');
         }
     });
     // h3 event listner 
@@ -199,9 +201,9 @@ todoForm.addEventListener('submit', (e) => {
     contentDiv.innerHTML = '';
     e.preventDefault();
     e.stopPropagation();
-
     taskFormAction();
-
+    addWeekProject();
+    display();
     closePopups();
 
 
@@ -280,6 +282,7 @@ function taskDisplayDiv(i) {
         pText.classList.add(projectArr[i].title.replace(/\s/g, '$'));
         todoDiv.append(pText);
         editText(pText);
+        editWeekProject(pText);
         let inputDate = document.createElement('input');
         inputDate.setAttribute('type', 'date');
         inputDate.className = projectArr[i].title.replace(/\s/g, '$');
@@ -291,11 +294,13 @@ function taskDisplayDiv(i) {
         let deleteButton = document.createElement('button');
         todoDiv.append(deleteButton);
         deleteButton.textContent = 'X';
-        deleteButton.className = projectTitle.replace(/\s/g, '$');
 
+        deleteButton.className = projectTitle.replace(/\s/g, '$');
+        deleteButton.classList.add(projectArr[i].title.replace(/\s/g, '$'));
 
 
         removeTask(deleteButton, projectArr, i);
+        removeWeekTaskProject(deleteButton);
         buttonTaskAdd(deleteButton);
 
         mouseOver(deleteButton);
@@ -386,13 +391,13 @@ function removeTask(button, arr, i) {
 function edit(input) {
     let projectArr = project.allProjects
     input.addEventListener('mouseleave', (e) => {
-        console.log('test')
+
         for (let i = 0; i < projectArr.length; i++) {
             let todoArr = projectArr[i].todo
             for (let j = 0; j < todoArr.length; j++) {
 
                 let title = todoArr[j].title.replace(/\s/g, '$');
-                console.log(todoArr[j])
+
 
                 if (e.target.classList.contains(title)) {
                     todoArr[j].date = input.value;
@@ -440,11 +445,11 @@ function buttonTaskAdd(button) {
 
                 taskDisplayDiv(i);
 
-            }
+            };
 
 
         }
-    })
+    });
 };
 
 

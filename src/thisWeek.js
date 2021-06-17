@@ -1,118 +1,197 @@
+import { add } from "lodash";
 import { task } from "./dailyTaskClass";
-import { contentDiv, todoForm, popupDiv, mouseOver } from "./project"
+import { contentDiv, } from "./project"
 import { Todo, project } from './projectClass';
 import { isThisWeek, parseISO } from './vendor';
 
+const tracker = document.querySelector('#tracking');
+const trackerP = document.querySelector('#trackingP');
+
+// Arrays for the counter display
+let weekArr = [];
+let weekPro = [];
 
 
 
-// Function tracking how many task we have in the same week
-function trackingWeek(number) {
 
-    number = 0;
+// function dispaly the counter
 
+function display() {
+    if (weekArr.length > 0) {
+        tracker.style.color = 'red';
+        tracker.textContent = weekArr.length
+    } else if (weekArr.length <= 0) {
+        tracker.textContent = weekArr.length
+        tracker.style.color = 'blue';
+    }
+
+    if (weekPro.length > 0) {
+        trackerP.style.color = 'red'
+        trackerP.textContent = weekPro.length
+    } else if (weekPro.length <= 0) {
+        trackerP.textContent = weekPro.length
+        trackerP.style.color = 'blue';
+    }
+
+}
+
+
+// Functions add remove and edit for the inbox Tasks
+
+function addWeek() {
     let taskArr = task.allTasks;
     for (let i = 0; i < taskArr.length; i++) {
-        number++
 
-        let time = parseISO(taskArr[i].date);
-        if (isThisWeek(time) === true) {
+        let timeTask = parseISO(taskArr[i].date);
+        if (isThisWeek(timeTask) === true) {
 
-            tracker.textContent = number;
+            weekArr.push(taskArr[i]);
+            weekArr = _.uniq(weekArr);
+            display();
+            console.log(weekArr);
+
         }
     }
 
 
+}
+
+function removeWeek(button) {
+
+    button.addEventListener('click', (e) => {
+        for (let i = 0; i < weekArr.length; i++) {
+            let title = weekArr[i].title.replace(/\s/g, '$');
+            if (e.target.classList.contains(title)) {
+                weekArr.splice(i, 1);
+
+                console.log(weekArr);
+
+                display();
+
+            }
+        }
+
+
+    });
+}
+
+function editWeek(textDesc) {
+    textDesc.addEventListener('mouseleave', (e) => {
+        addWeek();
+        for (let i = 0; i < weekArr.length; i++) {
+            let title = weekArr[i].title.replace(/\s/g, '$');
+
+            let timeTask = parseISO(weekArr[i].date);
+
+            if (e.target.classList.contains(title)) {
+                if (isThisWeek(timeTask) === false) {
+                    weekArr.splice(i, 1);
+                    console.log(weekArr);
+                    display();
+                }
+
+
+            }
+
+        };
+    });
+}
+
+
+
+
+// Functions add remove and edit for the projects Tasks
+function addWeekProject() {
     let projectArr = project.allProjects;
-    for (let j = 0; j < projectArr.length; j++) {
-        let todoArr = projectArr[j].todo;
 
-        for (let i = 0; i < todoArr.length; i++) {
-            number++
-            let time = parseISO(todoArr[i].date)
-            if (isThisWeek(time) === true) {
-                tracker.textContent = number;
+
+    for (let i = 0; i < projectArr.length; i++) {
+        let todoArr = projectArr[i].todo;
+
+        for (let k = 0; k < todoArr.length; k++) {
+
+            let timeProject = parseISO(todoArr[k].date)
+            if (isThisWeek(timeProject) === true) {
+                weekPro.push(todoArr[k]);
+                weekPro = _.uniq(weekPro);
+                display();
+                console.log(weekPro);
             }
         }
     }
-    console.log(number)
-    return number;
-
-}
-const tracker = document.querySelector('#tracking')
-
-class Tracker {
-    constructor() {
-        this.number = 0
-    }
-
-    add() {
-        let taskArr = task.allTasks;
-        for (let i = 0; i < taskArr.length; i++) {
-
-
-            let timeTask = parseISO(taskArr[i].date);
-            if (isThisWeek(timeTask) === true) {
-                this.number++
-                tracker.textContent = this.number;
-            }
-        }
-
-
-        // let projectArr = project.allProjects;
-        // for (let j = 0; j < projectArr.length; j++) {
-        //     let todoArr = projectArr[j].todo;
-
-        //     for (let i = 0; i < todoArr.length; i++) {
-
-        //         let timeProject = parseISO(todoArr[i].date)
-        //         if (isThisWeek(timeProject) === true) {
-        //             this.number++
-        //             tracker.textContent = this.number;
-        //         }
-        //     }
-        // }
-
-    }
-
-    subtraction() {
-        let taskArr = task.allTasks;
-        for (let i = 0; i < taskArr.length; i++) {
-
-
-            let timeTask = parseISO(taskArr[i].date);
-            if (isThisWeek(timeTask) === false) {
-                this.number--
-                tracker.textContent = this.number;
-            }
-        }
-
-
-        // let projectArr = project.allProjects;
-        // for (let j = 0; j < projectArr.length; j++) {
-        //     let todoArr = projectArr[j].todo;
-
-        //     for (let i = 0; i < todoArr.length; i++) {
-
-        //         let timeProject = parseISO(todoArr[i].date)
-        //         if (isThisWeek(timeProject) === false) {
-        //             this.number--
-        //             tracker.textContent = this.number;
-        //         }
-        //     }
-        // }
-
-    }
-    get numbers() {
-        return console.log(this)
-    }
-
-
 }
 
-export let weekNumber = new Tracker()
+function removeWeekTaskProject(button) {
+
+    button.addEventListener('click', (e) => {
 
 
+        for (let i = 0; i < weekPro.length; i++) {
+
+
+            let title = weekPro[i].title.replace(/\s/g, '$');
+
+            console.log(weekPro[i].date)
+            let timeProject = parseISO(weekPro[i].date)
+
+            if (e.target.classList.contains(title)) {
+                if (isThisWeek(timeProject) === true) {
+                    console.log(timeProject)
+                    console.log('hi')
+                    weekPro.splice(i, 1);
+                    console.log(weekPro)
+
+                }
+                display();
+            }
+        }
+
+    });
+}
+function removeWeekProject(span) {
+
+    span.addEventListener('click', (e) => {
+
+        weekPro.splice(0);
+        console.log(weekPro);
+        addWeekProject();
+        display();
+
+        console.log(weekPro);
+
+
+
+    });
+}
+
+function editWeekProject(textDesc) {
+    textDesc.addEventListener('mouseleave', (e) => {
+        addWeekProject();
+        for (let i = 0; i < weekPro.length; i++) {
+            let title = weekPro[i].title.replace(/\s/g, '$');
+
+            let timeTask = parseISO(weekPro[i].date);
+
+            if (e.target.classList.contains(title)) {
+                if (isThisWeek(timeTask) === false) {
+                    weekPro.splice(i, 1);
+                    console.log(weekPro);
+                    display();
+                }
+
+
+            }
+
+        };
+    });
+}
+
+
+
+
+
+
+// function displays tasks for inbox
 
 function taskDisplayTasks() {
 
@@ -165,8 +244,7 @@ function taskDisplayTasks() {
 
 
 
-
-
+// function displays tasks for Projects
 function projectTaskDisplay() {
 
 
@@ -225,4 +303,4 @@ function projectTaskDisplay() {
 
 
 
-export { taskDisplayTasks, projectTaskDisplay, trackingWeek }
+export { taskDisplayTasks, projectTaskDisplay, addWeek, removeWeek, display, editWeek, addWeekProject, removeWeekTaskProject, removeWeekProject, editWeekProject }

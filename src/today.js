@@ -9,6 +9,95 @@ import { isToday, parseISO } from './vendor';
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function displays tasks for inbox
 function taskDisplayDay() {
 
     let taskArr = task.allTasks;
@@ -60,7 +149,7 @@ function taskDisplayDay() {
 
 
 
-
+// function displays tasks for Projects
 function projectTaskDay() {
 
 

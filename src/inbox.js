@@ -1,7 +1,7 @@
 import { task } from "./dailyTaskClass";
 import { contentDiv, todoForm, popupDiv, mouseOver } from "./project"
-import { trackingWeek, weekNumber } from './thisWeek';
-import { isThisWeek, parseISO } from './vendor';
+import { addWeek, removeWeek, editWeek } from './thisWeek';
+
 
 
 
@@ -17,9 +17,8 @@ function inboxCreation() {
     todoForm.addEventListener('submit', (e) => {
 
         taskFormAction();
-        // trackingWeek();
-        weekNumber.add();
-        weekNumber.numbers;
+        addWeek();
+
         e.stopPropagation();
         e.preventDefault();
 
@@ -72,7 +71,7 @@ function taskDisplayInbox() {
 
 
     for (let i = 0; i < taskArr.length; i++) {
-        console.log(taskArr[i])
+
         let title = taskArr[i].title;
         const todoDiv = document.createElement('div');
         todoDiv.classList.add('card');
@@ -93,13 +92,14 @@ function taskDisplayInbox() {
         inputDate.className = title.replace(/\s/g, '$');
         mouseTest(inputDate);
         edit(inputDate);
+        editWeek(inputDate);
         todoDiv.append(inputDate);
         let deleteButton = document.createElement('button');
         todoDiv.append(deleteButton);
         deleteButton.textContent = 'X';
 
         deleteButton.className = title.replace(/\s/g, '$');
-
+        removeWeek(deleteButton);
 
         removeTask(deleteButton);
         mouseOver(deleteButton);
@@ -144,10 +144,10 @@ function edit(input) {
     let taskArr = task.allTasks;
 
     input.addEventListener('mouseleave', (e) => {
-        weekNumber.subtraction();
+        // weekNumber.subtraction();
         for (let i = 0; i < taskArr.length; i++) {
             let title = taskArr[i].title.replace(/\s/g, '$');
-            console.log(taskArr[i])
+
             if (e.target.classList.contains(title)) {
                 taskArr[i].date = input.value;
 
@@ -174,7 +174,7 @@ function editText(textDesc) {
     textDesc.addEventListener('mouseleave', (e) => {
         for (let i = 0; i < taskArr.length; i++) {
             let title = taskArr[i].title.replace(/\s/g, '$');
-            console.log(taskArr[i])
+            // console.log(taskArr[i])
             if (e.target.classList.contains(title)) {
                 taskArr[i].description = textDesc.value;
             }
@@ -196,7 +196,8 @@ function removeTask(span) {
             if (e.target.classList.contains(title)) {
 
                 e.target.parentNode.remove();
-                console.log(taskArr);
+
+
                 taskArr.splice(i, 1);
             }
 
@@ -205,6 +206,12 @@ function removeTask(span) {
 
     });
 }
+
+
+
+
+
+
 
 
 
