@@ -8,9 +8,7 @@ const tracker = document.querySelector('#tracking');
 const trackerP = document.querySelector('#trackingP');
 
 // Arrays for the counter display
-let weekArr = JSON.parse(localStorage.getItem('todos')) || [];
-
-let weekLocal;
+let weekArr = [];
 let weekPro = [];
 
 
@@ -19,32 +17,32 @@ let weekPro = [];
 // function dispaly the counter
 
 function display() {
-    // if (weekArr.length > 0) {
-    //     tracker.style.color = '#ba181b';
-    //     tracker.textContent = weekArr.length
-    //     tracker.parentElement.classList.add('scaleSpan')
-    //     setTimeout(() => {
-    //         tracker.parentElement.classList.remove('scaleSpan')
-    //     }, 600)
-    // } else if (weekArr.length <= 0) {
-    //     tracker.textContent = weekArr.length
-    //     tracker.parentElement.classList.remove('scaleSpan')
-    //     tracker.style.color = 'black';
-    // }
+    if (weekArr.length > 0) {
+        tracker.style.color = '#ba181b';
+        tracker.textContent = weekArr.length
+        tracker.parentElement.classList.add('scaleSpan')
+        setTimeout(() => {
+            tracker.parentElement.classList.remove('scaleSpan')
+        }, 600)
+    } else if (weekArr.length <= 0) {
+        tracker.textContent = weekArr.length
+        tracker.parentElement.classList.remove('scaleSpan')
+        tracker.style.color = 'black';
+    }
 
-    // if (weekPro.length > 0) {
-    //     trackerP.style.color = '#ba181b'
-    //     trackerP.classList.add('scaleSpan')
-    //     trackerP.textContent = weekPro.length
-    //     trackerP.parentElement.classList.add('scaleSpan')
-    //     setTimeout(() => {
-    //         trackerP.parentElement.classList.remove('scaleSpan')
-    //     }, 600)
-    // } else if (weekPro.length <= 0) {
-    //     trackerP.textContent = weekPro.length
-    //     trackerP.parentElement.classList.remove('scaleSpan')
-    //     trackerP.style.color = 'black';
-    // }
+    if (weekPro.length > 0) {
+        trackerP.style.color = '#ba181b'
+        trackerP.classList.add('scaleSpan')
+        trackerP.textContent = weekPro.length
+        trackerP.parentElement.classList.add('scaleSpan')
+        setTimeout(() => {
+            trackerP.parentElement.classList.remove('scaleSpan')
+        }, 600)
+    } else if (weekPro.length <= 0) {
+        trackerP.textContent = weekPro.length
+        trackerP.parentElement.classList.remove('scaleSpan')
+        trackerP.style.color = 'black';
+    }
 
 }
 
@@ -52,69 +50,62 @@ function display() {
 // Functions add remove and edit for the inbox Tasks
 
 function addWeek() {
-    // let taskArr = task.allTasks;
-    // let tasksLocal = JSON.parse(localStorage.getItem('todos'));
+    let taskArr = task.allTasks;
+    for (let i = 0; i < taskArr.length; i++) {
 
-    // for (let i = 0; i < tasksLocal.length; i++) {
+        let timeTask = parseISO(taskArr[i].date);
+        if (isThisWeek(timeTask) === true) {
 
-    //     let timeTask = parseISO(tasksLocal[i].date);
-    //     if (isThisWeek(timeTask) === true) {
-
-    //         weekArr.push(tasksLocal[i]);
-    //         weekArr = _.uniq(weekArr);
-    // localStorage.setItem('weekly', JSON.stringify(weekArr));
-    //         display();
+            weekArr.push(taskArr[i]);
+            weekArr = _.uniq(weekArr);
+            display();
 
 
-    //     }
+        }
+    }
 
-
-
-
-    // }
 
 }
-
 
 function removeWeek(button) {
 
-    // button.addEventListener('click', (e) => {
-    //     for (let i = 0; i < weekArr.length; i++) {
-    //         let title = weekArr[i].title.replace(/\s/g, '$');
-    //         if (e.target.classList.contains(title)) {
-    //             weekArr.splice(i, 1);
+    button.addEventListener('click', (e) => {
+        for (let i = 0; i < weekArr.length; i++) {
+            let title = weekArr[i].title.replace(/\s/g, '$');
+            if (e.target.classList.contains(title)) {
+                weekArr.splice(i, 1);
 
 
 
-    //             display();
+                display();
 
-    //         }
-    //     }
+            }
+        }
 
 
-    // });
+    });
 }
 
 function editWeek(textDesc) {
-    // textDesc.addEventListener('mouseleave', (e) => {
-    //     addWeek();
-    //     for (let i = 0; i < weekArr.length; i++) {
-    //         let title = weekArr[i].title.replace(/\s/g, '$');
+    textDesc.addEventListener('mouseleave', (e) => {
+        addWeek();
+        for (let i = 0; i < weekArr.length; i++) {
+            let title = weekArr[i].title.replace(/\s/g, '$');
 
-    //         let timeTask = parseISO(weekArr[i].date);
+            let timeTask = parseISO(weekArr[i].date);
 
-    //         if (e.target.classList.contains(title)) {
-    //             if (isThisWeek(timeTask) === false) {
-    //                 weekArr.splice(i, 1);
+            if (e.target.classList.contains(title)) {
+                if (isThisWeek(timeTask) === false) {
+                    weekArr.splice(i, 1);
 
-    //                 display();
-    //             }
+                    display();
+                }
 
 
-    //         }
+            }
 
-    //     };
-    // });
+        };
+    });
 }
 
 
@@ -122,81 +113,81 @@ function editWeek(textDesc) {
 
 // Functions add remove and edit for the projects Tasks
 function addWeekProject() {
-    // let projectArr = project.allProjects;
+    let projectArr = project.allProjects;
 
 
-    // for (let i = 0; i < projectArr.length; i++) {
-    //     let todoArr = projectArr[i].todo;
+    for (let i = 0; i < projectArr.length; i++) {
+        let todoArr = projectArr[i].todo;
 
-    //     for (let k = 0; k < todoArr.length; k++) {
+        for (let k = 0; k < todoArr.length; k++) {
 
-    //         let timeProject = parseISO(todoArr[k].date)
-    //         if (isThisWeek(timeProject) === true) {
-    //             weekPro.push(todoArr[k]);
-    //             weekPro = _.uniq(weekPro);
-    //             display();
+            let timeProject = parseISO(todoArr[k].date)
+            if (isThisWeek(timeProject) === true) {
+                weekPro.push(todoArr[k]);
+                weekPro = _.uniq(weekPro);
+                display();
 
-    //         }
-    //     }
-    // }
+            }
+        }
+    }
 }
 
 function removeWeekTaskProject(button) {
 
-    // button.addEventListener('click', (e) => {
+    button.addEventListener('click', (e) => {
 
 
-    //     for (let i = 0; i < weekPro.length; i++) {
+        for (let i = 0; i < weekPro.length; i++) {
 
 
-    //         let title = weekPro[i].title.replace(/\s/g, '$');
+            let title = weekPro[i].title.replace(/\s/g, '$');
 
-    //         console.log(weekPro[i].date)
-    //         let timeProject = parseISO(weekPro[i].date)
+            console.log(weekPro[i].date)
+            let timeProject = parseISO(weekPro[i].date)
 
-    //         if (e.target.classList.contains(title)) {
-    //             if (isThisWeek(timeProject) === true) {
+            if (e.target.classList.contains(title)) {
+                if (isThisWeek(timeProject) === true) {
 
-    //                 weekPro.splice(i, 1);
+                    weekPro.splice(i, 1);
 
 
-    //             }
-    //             display();
-    //         }
-    //     }
+                }
+                display();
+            }
+        }
 
-    // });
+    });
 }
 function removeWeekProject(span) {
 
-    // span.addEventListener('click', (e) => {
-    //     weekPro.splice(0);
-    //     addWeekProject();
-    //     display();
+    span.addEventListener('click', (e) => {
+        weekPro.splice(0);
+        addWeekProject();
+        display();
 
 
-    // });
+    });
 }
 
 function editWeekProject(textDesc) {
-    // textDesc.addEventListener('mouseleave', (e) => {
-    //     addWeekProject();
-    //     for (let i = 0; i < weekPro.length; i++) {
-    //         let title = weekPro[i].title.replace(/\s/g, '$');
+    textDesc.addEventListener('mouseleave', (e) => {
+        addWeekProject();
+        for (let i = 0; i < weekPro.length; i++) {
+            let title = weekPro[i].title.replace(/\s/g, '$');
 
-    //         let timeTask = parseISO(weekPro[i].date);
+            let timeTask = parseISO(weekPro[i].date);
 
-    //         if (e.target.classList.contains(title)) {
-    //             if (isThisWeek(timeTask) === false) {
-    //                 weekPro.splice(i, 1);
-    //                 display();
-    //             }
+            if (e.target.classList.contains(title)) {
+                if (isThisWeek(timeTask) === false) {
+                    weekPro.splice(i, 1);
+                    display();
+                }
 
 
-    //         }
+            }
 
-    //     };
-    // });
+        };
+    });
 }
 
 
@@ -209,11 +200,10 @@ function editWeekProject(textDesc) {
 function taskDisplayTasks() {
 
     let taskArr = task.allTasks;
-    let taskLocal = JSON.parse(localStorage.getItem('todos'));
 
 
-    for (let i = 0; i < taskLocal.length; i++) {
-        let time = parseISO(taskLocal[i].date)
+    for (let i = 0; i < taskArr.length; i++) {
+        let time = parseISO(taskArr[i].date)
         if (isThisWeek(time) === true) {
 
 
@@ -236,16 +226,16 @@ function taskDisplayTasks() {
 
                 switch (k) {
                     case 0:
-                        h4.textContent = taskLocal[i].title;
+                        h4.textContent = taskArr[i].title;
                         break;
                     case 1:
-                        spanP.innerHTML = taskLocal[i].priority;
+                        spanP.innerHTML = taskArr[i].priority;
                         break;
                     case 2:
-                        p.textContent = taskLocal[i].description;
+                        p.textContent = taskArr[i].description;
                         break;
                     case 3:
-                        spanDate.textContent = taskLocal[i].date;
+                        spanDate.textContent = taskArr[i].date;
                         break;
                 }
             }
@@ -317,4 +307,4 @@ function projectTaskDisplay() {
 
 
 
-export { taskDisplayTasks, projectTaskDisplay, addWeek, removeWeek, display, editWeek, addWeekProject, removeWeekTaskProject, removeWeekProject, editWeekProject, }
+export { taskDisplayTasks, projectTaskDisplay, addWeek, removeWeek, display, editWeek, addWeekProject, removeWeekTaskProject, removeWeekProject, editWeekProject }

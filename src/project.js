@@ -109,67 +109,6 @@ function projectFormMaker() {
 }
 
 
-
-function projectDisplay() {
-    let projectsLocal = JSON.parse(localStorage.getItem('projects'))
-    let h2Title = document.querySelector('#displayTitle')
-    projectDiv.innerHTML = ''
-
-    for (let i = 0; i < projectsLocal.length; i++) {
-        let h3 = document.createElement('h3');
-        h3.classList.add('test');
-        projectDiv.append(h3);
-        let spanDelete = document.createElement('span');
-
-        spanDelete.textContent = 'X';
-        spanDelete.style.display = 'none'
-        removeProject(spanDelete, h2Title);
-
-
-
-        h3.textContent = projectsLocal[i].title;
-
-
-
-
-        h3.addEventListener('click', (e) => {
-            e.stopPropagation();
-            h3.append(spanDelete);
-            spanDelete.className = e.target.textContent.replace(/\s/g, '$');;
-            spanDelete.style.display = 'block'
-            e.currentTarget.classList.toggle('active');
-            // Target the  h3 siblings
-            let siblings = getSiblings(e.currentTarget);
-            let siblingText = siblings.map(e => e.classList.remove('active'));
-
-            contentDiv.innerHTML = '';
-
-
-            for (let i = 0; i < projectsLocal.length; i++) {
-                let title = projectsLocal[i].title
-
-                taskDisplayDiv(i)
-
-
-                if (e.target.textContent === title + 'X') {
-
-                    h2Title.textContent = title
-                    if (e.target.classList.contains('active')) {
-                        todoForm.className = title.replace(/\s/g, '$')
-
-
-                    }
-
-
-                }
-            }
-
-        })
-    }
-
-}
-
-
 // Form Action function 
 function formAction(text) {
 
@@ -178,9 +117,6 @@ function formAction(text) {
     buttonAdd.addEventListener('click', (e) => {
         popupDiv.style.display = 'flex';
     })
-
-
-
 
     // Main h3 holds the project title
 
@@ -210,7 +146,7 @@ function formAction(text) {
     h3.addEventListener('click', (e) => {
         e.stopPropagation();
         spanDelete.className = e.target.textContent.replace(/\s/g, '$');;
-        spanDelete.style.display = 'block'
+        spanDelete.style.display = 'block';
         e.currentTarget.classList.toggle('active');
 
         // Target the  h3 siblings
@@ -221,16 +157,16 @@ function formAction(text) {
         let projectArr = project.allProjects;
 
         for (let i = 0; i < projectArr.length; i++) {
-            let title = projectArr[i].title
+            let title = projectArr[i].title;
 
 
 
             if (e.target.textContent === title + 'X') {
 
-                h2Title.textContent = title
+                h2Title.textContent = title;
                 if (e.target.classList.contains('active')) {
-                    todoForm.className = title.replace(/\s/g, '$')
-                    taskDisplayDiv(i)
+                    todoForm.className = title.replace(/\s/g, '$');
+                    taskDisplayDiv(i);
 
 
                 }
@@ -241,12 +177,9 @@ function formAction(text) {
 
     })
 
+
     // Adds the Project to the Project Class Container
-    let projectsLocal = JSON.parse(localStorage.getItem('projects')) || [];
-    projectsLocal.push(project.newProject(text))
-    // project.newProject(text)
-    localStorage.setItem('projects', JSON.stringify(projectsLocal))
-    // console.log()
+    project.newProject(text)
 
 
 }
@@ -305,16 +238,14 @@ function taskFormAction() {
 
 
     let projectArr = project.allProjects
-    let projectsLocal = JSON.parse(localStorage.getItem('projects'))
 
 
-    for (let i = 0; i < projectsLocal.length; i++) {
-        let title = projectsLocal[i].title.replace(/\s/g, '$')
+    for (let i = 0; i < projectArr.length; i++) {
+        let title = projectArr[i].title.replace(/\s/g, '$')
         if (todoForm.classList.contains(title)) {
-            projectsLocal[i].todo.push(new Todo(titleInput.value, selectInput.value, textInput.value, dateInput.value));
-            // project.allProjects[i].todo.push(new Todo(titleInput.value, selectInput.value, textInput.value, dateInput.value));
-            localStorage.setItem('projects', JSON.stringify(projectsLocal));
-            taskDisplayDiv(i);
+            project.allProjects[i].todo.push(new Todo(titleInput.value, selectInput.value, textInput.value, dateInput.value));
+
+            taskDisplayDiv(i)
             taskFormReset(titleInput, selectInput, dateInput, textInput);
 
         }
@@ -345,10 +276,9 @@ function taskFormReset(title, select, date, text) {
 
 function taskDisplayDiv(i) {
 
-    let projectsLocal = JSON.parse(localStorage.getItem('projects'));
-    let projectArr = projectsLocal[i].todo
-    let projectTitle = projectsLocal[i].title
 
+    let projectArr = project.allProjects[i].todo
+    let projectTitle = project.allProjects[i].title
 
 
     for (i = 0; i < projectArr.length; i++) {
@@ -384,7 +314,7 @@ function taskDisplayDiv(i) {
         deleteButton.classList.add(projectArr[i].title.replace(/\s/g, '$'));
 
 
-        removeTask(deleteButton);
+        removeTask(deleteButton, projectArr, i);
         removeDayTaskProject(deleteButton);
         removeWeekTaskProject(deleteButton);
         buttonTaskAdd(deleteButton);
@@ -435,25 +365,17 @@ function mouseOver(button) {
 // Helper function  Deletes a Project
 function removeProject(span, h2) {
     let projectArr = project.allProjects
-    let projectsLocal = JSON.parse(localStorage.getItem('projects'))
     span.addEventListener('click', (e) => {
         h2.textContent = '';
-        for (let i = 0; i < projectsLocal.length; i++) {
-            let title = projectsLocal[i].title.replace(/\s/g, '$');
+        for (let i = 0; i < projectArr.length; i++) {
+            let title = projectArr[i].title.replace(/\s/g, '$');
             if (e.target.classList.contains(title + "X")) {
-                projectDiv.innerHTML = ''
 
-                // e.target.parentNode.remove();
-                projectsLocal.splice(i, 1);
-
-
-
+                e.target.parentNode.remove();
+                projectArr.splice(i, 1);
             }
 
-            localStorage.setItem('projects', JSON.stringify(projectsLocal));
-            projectDisplay();
         }
-
 
 
     });
@@ -461,31 +383,20 @@ function removeProject(span, h2) {
 
 
 // Helper Function Deletes Task from a Project
-function removeTask(button) {
-    let projectsLocal = JSON.parse(localStorage.getItem('projects'))
+function removeTask(button, arr, i) {
+
     button.addEventListener('click', (e) => {
-        for (let i = 0; i < projectsLocal.length; i++) {
-            let todoArr = projectsLocal[i].todo
+        contentDiv.innerHTML = '';
 
-            for (let j = 0; j < todoArr.length; j++) {
+        if (e.currentTarget.classList.contains('delete')) {
 
-
-                let title = todoArr[j].title.replace(/\s/g, '$');
-                if (e.currentTarget.classList.contains(title)) {
-                    contentDiv.innerHTML = '';
-                    todoArr.splice(j, 1);
-
-                }
+            arr.splice(i, 1);
 
 
-            }
+
 
         }
-        localStorage.setItem('projects', JSON.stringify(projectsLocal));
-        taskDisplayDiv();
     })
-
-
 };
 
 
@@ -560,7 +471,7 @@ function buttonTaskAdd(button) {
 
 
 
-export { projectFormMaker, mouseOver, todoForm, popupProjectDiv, contentDiv, popupDiv, projectDisplay }
+export { projectFormMaker, mouseOver, todoForm, popupProjectDiv, contentDiv, popupDiv, }
 
 
 

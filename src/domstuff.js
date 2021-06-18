@@ -1,4 +1,4 @@
-import { projectFormMaker, todoForm, popupProjectDiv, contentDiv, projectDisplay } from './project'
+import { projectFormMaker, todoForm, popupProjectDiv, contentDiv, } from './project'
 import { inboxCreation, taskDisplayInbox } from './inbox';
 import { taskDisplayTasks, projectTaskDisplay, trackingWeek, weekNumber } from './thisWeek';
 import { taskDisplayDay, projectTaskDay } from './today';
@@ -31,7 +31,7 @@ function addProject() {
         contentDiv.innerHTML = '';
         h2.textContent = 'Projects'
         projectFormMaker();
-        projectDisplay();
+
 
     })
 
@@ -83,7 +83,7 @@ function thisDayTasks() {
 }
 function projectsContainer() {
     h2Project.addEventListener('click', () => {
-        projectDisplay();
+
         addButton.style.display = 'block';
         addButton.disabled = true
         contentDiv.innerHTML = '';

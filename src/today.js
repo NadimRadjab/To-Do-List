@@ -17,31 +17,31 @@ let dayPro = [];
 // function dispaly the counter
 
 function displayDay() {
-    // if (dayArr.length > 0) {
-    //     trackerDay.style.color = '#ba181b';
-    //     trackerDay.textContent = dayArr.length
-    //     trackerDay.parentElement.classList.add('scaleSpan')
-    //     setTimeout(() => {
-    //         trackerDay.parentElement.classList.remove('scaleSpan')
-    //     }, 600)
-    // } else if (dayArr.length <= 0) {
-    //     trackerDay.textContent = dayArr.length
-    //     trackerDay.parentElement.classList.remove('scaleSpan')
-    //     trackerDay.style.color = 'black';
-    // }
+    if (dayArr.length > 0) {
+        trackerDay.style.color = '#ba181b';
+        trackerDay.textContent = dayArr.length
+        trackerDay.parentElement.classList.add('scaleSpan')
+        setTimeout(() => {
+            trackerDay.parentElement.classList.remove('scaleSpan')
+        }, 600)
+    } else if (dayArr.length <= 0) {
+        trackerDay.textContent = dayArr.length
+        trackerDay.parentElement.classList.remove('scaleSpan')
+        trackerDay.style.color = 'black';
+    }
 
-    // if (dayPro.length > 0) {
-    //     trackerDayP.style.color = '#ba181b'
-    //     trackerDayP.textContent = dayPro.length
-    //     trackerDayP.parentElement.classList.add('scaleSpan')
-    //     setTimeout(() => {
-    //         trackerDayP.parentElement.classList.remove('scaleSpan')
-    //     }, 600)
-    // } else if (dayPro.length <= 0) {
-    //     trackerDayP.textContent = dayPro.length
-    //     trackerDayP.parentElement.classList.remove('scaleSpan')
-    //     trackerDayP.style.color = 'black';
-    // }
+    if (dayPro.length > 0) {
+        trackerDayP.style.color = '#ba181b'
+        trackerDayP.textContent = dayPro.length
+        trackerDayP.parentElement.classList.add('scaleSpan')
+        setTimeout(() => {
+            trackerDayP.parentElement.classList.remove('scaleSpan')
+        }, 600)
+    } else if (dayPro.length <= 0) {
+        trackerDayP.textContent = dayPro.length
+        trackerDayP.parentElement.classList.remove('scaleSpan')
+        trackerDayP.style.color = 'black';
+    }
 
 }
 
@@ -49,59 +49,59 @@ function displayDay() {
 // Functions add remove and edit for the inbox Tasks
 
 function addDay() {
-    // let taskArr = task.allTasks;
-    // for (let i = 0; i < taskArr.length; i++) {
+    let taskArr = task.allTasks;
+    for (let i = 0; i < taskArr.length; i++) {
 
-    //     let timeTask = parseISO(taskArr[i].date);
-    //     if (isToday(timeTask) === true) {
+        let timeTask = parseISO(taskArr[i].date);
+        if (isToday(timeTask) === true) {
 
-    //         dayArr.push(taskArr[i]);
-    //         dayArr = _.uniq(dayArr);
-    //         displayDay();
+            dayArr.push(taskArr[i]);
+            dayArr = _.uniq(dayArr);
+            displayDay();
 
 
-    //     }
-    // }
+        }
+    }
 
 
 }
 
 function removeDay(button) {
 
-    // button.addEventListener('click', (e) => {
-    //     for (let i = 0; i < dayArr.length; i++) {
-    //         let title = dayArr[i].title.replace(/\s/g, '$');
-    //         if (e.target.classList.contains(title)) {
-    //             dayArr.splice(i, 1);
-    //             displayDay();
+    button.addEventListener('click', (e) => {
+        for (let i = 0; i < dayArr.length; i++) {
+            let title = dayArr[i].title.replace(/\s/g, '$');
+            if (e.target.classList.contains(title)) {
+                dayArr.splice(i, 1);
+                displayDay();
 
-    //         }
-    //     }
+            }
+        }
 
 
-    // });
+    });
 }
 
 function editDay(textDesc) {
-    // textDesc.addEventListener('mouseleave', (e) => {
-    //     addDay();
-    //     for (let i = 0; i < dayArr.length; i++) {
-    //         let title = dayArr[i].title.replace(/\s/g, '$');
+    textDesc.addEventListener('mouseleave', (e) => {
+        addDay();
+        for (let i = 0; i < dayArr.length; i++) {
+            let title = dayArr[i].title.replace(/\s/g, '$');
 
-    //         let timeTask = parseISO(dayArr[i].date);
+            let timeTask = parseISO(dayArr[i].date);
 
-    //         if (e.target.classList.contains(title)) {
-    //             if (isToday(timeTask) === false) {
-    //                 dayArr.splice(i, 1);
+            if (e.target.classList.contains(title)) {
+                if (isToday(timeTask) === false) {
+                    dayArr.splice(i, 1);
 
-    //                 displayDay();
-    //             }
+                    displayDay();
+                }
 
 
-    //         }
+            }
 
-    //     };
-    // });
+        };
+    });
 }
 
 
@@ -109,82 +109,82 @@ function editDay(textDesc) {
 
 // Functions add remove and edit for the projects Tasks
 function addDayProject() {
-    // let projectArr = project.allProjects;
+    let projectArr = project.allProjects;
 
 
-    // for (let i = 0; i < projectArr.length; i++) {
-    //     let todoArr = projectArr[i].todo;
+    for (let i = 0; i < projectArr.length; i++) {
+        let todoArr = projectArr[i].todo;
 
-    //     for (let k = 0; k < todoArr.length; k++) {
+        for (let k = 0; k < todoArr.length; k++) {
 
-    //         let timeProject = parseISO(todoArr[k].date)
-    //         if (isToday(timeProject) === true) {
-    //             dayPro.push(todoArr[k]);
-    //             dayPro = _.uniq(dayPro);
+            let timeProject = parseISO(todoArr[k].date)
+            if (isToday(timeProject) === true) {
+                dayPro.push(todoArr[k]);
+                dayPro = _.uniq(dayPro);
 
-    //             displayDay();
+                displayDay();
 
-    //         }
-    //     }
-    // }
+            }
+        }
+    }
 }
 
 function removeDayTaskProject(button) {
 
-    // button.addEventListener('click', (e) => {
+    button.addEventListener('click', (e) => {
 
 
-    //     for (let i = 0; i < dayPro.length; i++) {
+        for (let i = 0; i < dayPro.length; i++) {
 
 
-    //         let title = dayPro[i].title.replace(/\s/g, '$');
+            let title = dayPro[i].title.replace(/\s/g, '$');
 
-    //         console.log(dayPro[i].date)
-    //         let timeProject = parseISO(dayPro[i].date)
+            console.log(dayPro[i].date)
+            let timeProject = parseISO(dayPro[i].date)
 
-    //         if (e.target.classList.contains(title)) {
-    //             if (isToday(timeProject) === true) {
+            if (e.target.classList.contains(title)) {
+                if (isToday(timeProject) === true) {
 
-    //                 dayPro.splice(i, 1);
+                    dayPro.splice(i, 1);
 
 
-    //             }
-    //             displayDay();
-    //         }
-    //     }
+                }
+                displayDay();
+            }
+        }
 
-    // });
+    });
 }
 function removeDayProject(span) {
 
-    // span.addEventListener('click', (e) => {
-    //     dayPro.splice(0);
-    //     addDayProject();
-    //     displayDay();
+    span.addEventListener('click', (e) => {
+        dayPro.splice(0);
+        addDayProject();
+        displayDay();
 
 
-    // });
+    });
 }
 
 function editDayProject(textDesc) {
-    // textDesc.addEventListener('mouseleave', (e) => {
-    //     addDayProject();
-    //     for (let i = 0; i < dayPro.length; i++) {
-    //         let title = dayPro[i].title.replace(/\s/g, '$');
+    textDesc.addEventListener('mouseleave', (e) => {
+        addDayProject();
+        for (let i = 0; i < dayPro.length; i++) {
+            let title = dayPro[i].title.replace(/\s/g, '$');
 
-    //         let timeTask = parseISO(dayPro[i].date);
+            let timeTask = parseISO(dayPro[i].date);
 
-    //         if (e.target.classList.contains(title)) {
-    //             if (isToday(timeTask) === false) {
-    //                 dayPro.splice(i, 1);
-    //                 displayDay();
-    //             }
+            if (e.target.classList.contains(title)) {
+                if (isToday(timeTask) === false) {
+                    dayPro.splice(i, 1);
+                    displayDay();
+                }
 
 
-    //         }
+            }
 
-    //     };
-    // });
+        };
+    });
 }
 
 
@@ -203,10 +203,10 @@ function editDayProject(textDesc) {
 function taskDisplayDay() {
 
     let taskArr = task.allTasks;
-    let taskLocal = JSON.parse(localStorage.getItem('todos'));
 
-    for (let i = 0; i < taskLocal.length; i++) {
-        let time = parseISO(taskLocal[i].date)
+
+    for (let i = 0; i < taskArr.length; i++) {
+        let time = parseISO(taskArr[i].date)
         if (isToday(time) === true) {
 
             const todoDiv = document.createElement('div');
@@ -228,16 +228,16 @@ function taskDisplayDay() {
 
                 switch (k) {
                     case 0:
-                        h4.textContent = taskLocal[i].title;
+                        h4.textContent = taskArr[i].title;
                         break;
                     case 1:
-                        spanP.innerHTML = taskLocal[i].priority;
+                        spanP.innerHTML = taskArr[i].priority;
                         break;
                     case 2:
-                        p.textContent = taskLocal[i].description;
+                        p.textContent = taskArr[i].description;
                         break;
                     case 3:
-                        spanDate.textContent = taskLocal[i].date;
+                        spanDate.textContent = taskArr[i].date;
                         break;
                 }
             }
